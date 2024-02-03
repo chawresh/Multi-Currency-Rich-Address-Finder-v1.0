@@ -62,10 +62,10 @@ conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
 cursor.execute('''
-    CREATE TABLE IF NOT EXISTS DataBase (
-        PubKeys TEXT PRIMARY KEY
+     CREATE TABLE IF NOT EXISTS DataBase (
+        PubKeys TEXT NOT NULL UNIQUE
     )
-''')
+""")
 conn.commit()
 
 start_block_file = 'block.txt'
