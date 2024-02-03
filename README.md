@@ -47,7 +47,7 @@ Getting Started:
 """
 Overview:
 - Multi-currency rich address finder for Ethereum, Binance Smart Chain, Avalanche, and Polygon blockchains.
-- Checks for new addresses and their balances, storing results in 'newaddresses.txt' and  Multi Currency Rich Address Finder v1.0 OFFLINE is add the new rich addresses into the 'PubKeys.db' every 25000 scans
+- Checks for new addresses and their balances, storing results in `newaddresses.txt` and  Multi Currency Rich Address Finder v1.0 OFFLINE is add the new rich addresses into the `PubKeys.db` every 25000 scans
 
 Features:
 1. Blockchain Support:
