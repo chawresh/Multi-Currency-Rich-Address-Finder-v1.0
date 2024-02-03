@@ -1,4 +1,4 @@
-"""
+w"""
 Multi Currency Rich Address Finder v1.0
 
 Developed by Mustafa AKBAL
@@ -221,7 +221,7 @@ def add_to_database(cursor, conn, addresses_file_path):
         conn.commit()
         with open(addresses_file_path, 'w') as file:
             file.write("")
-            print(f'{Colors.RED}/Users/chawresh/Desktop/yeniadresler.txt Addresses Are Erased.{Colors.RESET}')
+            print(f'{Colors.RED}newaddresses.txt Addresses Are Erased.{Colors.RESET}')
     except sqlite3.Error as hata:
         print(f"SQLite Error: {hata}")
     except FileNotFoundError as hata:
