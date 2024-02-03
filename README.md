@@ -47,8 +47,8 @@ Additional dependencies mentioned in the script (hdwallet, rich)
 Installation
 Clone the repository:
 
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+gh repo clone chawresh/Multi-Currency-Rich-Address-Finder-v1.0
+cd Multi-Currency-Rich-Address-Finder-v1.0
 
 Install dependencies:
 pip install -r requirements.txt
