@@ -388,31 +388,31 @@ def main():
                     future = executor.submit(process_private_key, args)
                     clear_terminal()
                     infoPanel = (
-                        f"[gold1 on grey15]Total Rich Address In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
+                        f"[gold1 on grey15]Total Rich Addresses In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
                         f"[gold1 on grey15]Total Checked : [orange_red1]{private_key_count} [/]"
                         f"[gold1 on grey15]Win: [white]{win}[/]\n"
-                        f"PRIVATEKEY             : [grey54]{private_key}[/]\n"
-                        f"[gold1 on grey15]BTC p2pkh              : [white]{p2pkh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wpkh             : [white]{p2wpkh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wpkh_in_p2sh     : [white]{p2wpkh_in_p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wsh_in_p2sh.     : [white]{p2wsh_in_p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2sh_btc           : [white]{p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]ETH/BSC/AVAX/POLYGON   : [white]{ethaddr}[/]\n"
-                        f"[gold1 on grey15]TRX                    : [white]{trxadd}[/]\n"
-                        f"[gold1 on grey15]DOGE                   : [white]{dgaddr}[/]\n"
-                        f"[gold1 on grey15]BCH bch_p2pkh          : [white]{bch_p2pkh}[/]\n"
-                        f"[gold1 on grey15]BCH bch_p2sh           : [white]{bch_p2sh}[/]\n"
-                        f"[gold1 on grey15]DASH dash_p2pkh        : [white]{dash_p2pkh}[/]\n"
-                        f"[gold1 on grey15]DASH dash_p2sh         : [white]{dash_p2sh}[/]\n"
-                        f"[gold1 on grey15]ZEC zec_p2pkh          : [white]{zec_p2pkh}[/]\n"
-                        f"[gold1 on grey15]ZEC zec_p2sh           : [white]{dash_p2sh}[/]\n"
-                        f"[gold1 on grey15]LTC ltc_p2pkh          : [white]{ltc_p2pkh}[/]\n"
-                        f"[gold1 on grey15]LTC ltc_p2sh           : [white]{ltc_p2sh}[/]\n"
-                        f"[gold1 on grey15]Found Wallets Info     : [white]{total_found}[/]"
+                        f"PRIVATEKEY               : [grey54]{private_key}[/]\n"
+                        f"[gold1 on grey15]BTC p2pkh                : [white]{p2pkh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wpkh               : [white]{p2wpkh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wpkh_in_p2sh       : [white]{p2wpkh_in_p2sh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wsh_in_p2sh.       : [white]{p2wsh_in_p2sh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2sh_btc             : [white]{p2sh_btc}[/]\n"
+                        f"[gold1 on grey15]ETH/BSC/AVAX/POLYGON     : [white]{ethaddr}[/]\n"
+                        f"[gold1 on grey15]TRX                      : [white]{trxadd}[/]\n"
+                        f"[gold1 on grey15]DOGE                     : [white]{dgaddr}[/]\n"
+                        f"[gold1 on grey15]BCH bch_p2pkh            : [white]{bch_p2pkh}[/]\n"
+                        f"[gold1 on grey15]BCH bch_p2sh             : [white]{bch_p2sh}[/]\n"
+                        f"[gold1 on grey15]DASH dash_p2pkh          : [white]{dash_p2pkh}[/]\n"
+                        f"[gold1 on grey15]DASH dash_p2sh           : [white]{dash_p2sh}[/]\n"
+                        f"[gold1 on grey15]ZEC zec_p2pkh            : [white]{zec_p2pkh}[/]\n"
+                        f"[gold1 on grey15]ZEC zec_p2sh             : [white]{dash_p2sh}[/]\n"
+                        f"[gold1 on grey15]LTC ltc_p2pkh            : [white]{ltc_p2pkh}[/]\n"
+                        f"[gold1 on grey15]LTC ltc_p2sh             : [white]{ltc_p2sh}[/]\n"
+                        f"[gold1 on grey15]Found Wallets Info       : [white]{total_found}[/]"
                     )
                     style = "bold on grey11"
                     console.print(
-                        Panel(str(infoPanel), title="[white]Multi Currency Rich Address Finder[/]",
+                        Panel(str(infoPanel), title="[white]Multi Currency Rich Address Finder OFFLINE[/]",
                               subtitle="[green_yellow blink] Developed By Mustafa AKBAL contact: mstf.akbal@gmail.com  Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5[/]", style="gold1"), style=style, justify="full"
                     )
                     time.sleep(wait_time)
