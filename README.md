@@ -8,6 +8,9 @@ DOWNLOAD DATABASE WITH OVER 131.000.000 ADDRESSES WITH BALANCE
 
 LINK:  https://drive.google.com/file/d/1QMdKjr-W3x2H9Vd1AyOZo-vRBoyiVjJy/view?usp=drive_link
 
+SCREENSHOT
+
+https://github.com/chawresh/Multi-Currency-Rich-Address-Finder-v1.0/blob/52c3a2fb8559fdfcad6662b5c908f783e005e76e/screenshot.png
 
 """
 Overview:
