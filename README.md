@@ -14,7 +14,7 @@ LINK:  https://drive.google.com/file/d/1QMdKjr-W3x2H9Vd1AyOZo-vRBoyiVjJy/view?us
 Overview:
 - Developed by Mustafa AKBAL
 - Contact: mstf.akbal@gmail.com
-- Ethereum Address for Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5
+- Ethereum Address for Donations: `0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5`
 - License: MIT License
 
 Legal Disclaimer and Warning:
