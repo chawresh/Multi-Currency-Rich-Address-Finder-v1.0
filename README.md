@@ -1,4 +1,4 @@
- Multi Currency Rich Address Finder v1.0 and  Multi-Currency Rich Address Scanner v1.0
+ Multi Currency Rich Address Finder v1.0 OFFLINE  and  Multi-Currency Rich Address Scanner v1.0
 
  
 THE FASTEST WALLET CHECKER
