@@ -1,5 +1,11 @@
 # Multi Currency Rich Address Finder v1.0 and  Multi-Currency Rich Address Scanner v1.0
 
+
+DOWNLOAD DATABASE WİTH OVER 131.000.000 ADDRESSES WITH BALANCE
+
+LINK:  
+
+
 """
 Overview:
 - Developed by Mustafa AKBAL
@@ -18,7 +24,7 @@ Features:
    - Generates random private keys and addresses for various cryptocurrencies (BTC, ETH, TRX, DOGE, BCH, DASH, ZEC, LTC).
    
 2. Address Matching:
-   - Checks if generated addresses match known "rich" addresses in the database.
+   - Checks if generated addresses match known "rich" addresses in the database
 
 3. Logging and Information:
    - Logs information about found addresses.
