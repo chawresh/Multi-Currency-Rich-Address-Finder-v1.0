@@ -1,5 +1,5 @@
 """
-Multi Currency Rich Address Finder V1 For Multi Currency Rich Address Finder v1.0
+Multi Currency Rich Address Scanner V1 For Multi Currency Rich Address Finder v1.0
 
 Developed by Mustafa AKBAL
 Contact: mstf.akbal@gmail.com
@@ -61,8 +61,8 @@ db_path = 'PubKeys.db'
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
-cursor.execute('''
-     CREATE TABLE IF NOT EXISTS DataBase (
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS DataBase (
         PubKeys TEXT NOT NULL UNIQUE
     )
 """)
@@ -148,7 +148,7 @@ async def check_addresses_in_database(address):
         return count > 0
 
     except Exception as e:
-        print(f'Adresin veritabanında kontrolünde hata oluştu: {str(e)}')
+        print(f'Error occurred during the verification of the address in the database: {str(e)}')
         return False
 
 
