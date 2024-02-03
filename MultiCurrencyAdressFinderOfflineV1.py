@@ -395,7 +395,7 @@ def main():
                         f"[gold1 on grey15]BTC p2pkh                : [white]{p2pkh_btc}[/]\n"
                         f"[gold1 on grey15]BTC p2wpkh               : [white]{p2wpkh_btc}[/]\n"
                         f"[gold1 on grey15]BTC p2wpkh_in_p2sh       : [white]{p2wpkh_in_p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wsh_in_p2sh.       : [white]{p2wsh_in_p2sh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wsh_in_p2sh        : [white]{p2wsh_in_p2sh_btc}[/]\n"
                         f"[gold1 on grey15]BTC p2sh_btc             : [white]{p2sh_btc}[/]\n"
                         f"[gold1 on grey15]ETH/BSC/AVAX/POLYGON     : [white]{ethaddr}[/]\n"
                         f"[gold1 on grey15]TRX                      : [white]{trxadd}[/]\n"
