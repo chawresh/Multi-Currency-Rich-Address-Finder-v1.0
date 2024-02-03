@@ -1,4 +1,4 @@
- Multi Currency Rich Address Finder v1.0 OFFLINE  and  Multi-Currency Rich Address Scanner v1.0
+ Multi Currency Rich Address Finder v1.0 OFFLINE  and  Multi-Currency Rich Address Scanner v1.0 
 
  
 THE FASTEST WALLET CHECKER
@@ -12,8 +12,9 @@ LINK:  https://drive.google.com/file/d/1QMdKjr-W3x2H9Vd1AyOZo-vRBoyiVjJy/view?us
 
 """
 Overview:
-- Developed by Mustafa AKBAL
+- Developed by `Mustafa AKBAL`
 - Contact: mstf.akbal@gmail.com
+- Instagram: `mstf.akbal`
 - Ethereum Address for Donations: `0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5`
 - License: MIT License
 
@@ -79,7 +80,7 @@ License:
 - Licensed under the MIT License.
 
 Acknowledgments:
-- Thanks to Mustafa AKBAL for developing the tool.
+- Thanks to `Mustafa AKBAL` for developing the tool.
 
 These scripts serve as powerful tools for exploring and analyzing rich addresses in various cryptocurrencies. Users are advised to use them responsibly and comply with legal regulations.
 """
