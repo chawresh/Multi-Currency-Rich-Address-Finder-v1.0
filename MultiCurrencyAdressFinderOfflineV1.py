@@ -240,9 +240,9 @@ def check_database(address_last_8, cursor):
         logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
         return False
 
-def save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_address, filename):
+def save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_address, found_addresses_filename):
     try:
-        with open(filename, 'a') as file:
+        with open(found_addresses_filename, 'a') as file:
             file.write(f"Private Key: {private_key}\n")
             file.write(f"Currency: {currency}\n")
             file.write("Addresses:\n")
