@@ -64,7 +64,7 @@ style = "bold on grey11"
 
 log_file = "app_log.log"
 sqlite_db_filename = 'PubKeys.db' #change the database file path
-found_addresses_filename = 'found.txt' #change the database file path
+found_addresses_filename = 'found.txt' #change the found.txt file path
 addresses_file_path = 'newaddresses.txt' #if you want to add new rich addresses into the database 
 
 # Set logging level
