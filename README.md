@@ -57,7 +57,7 @@ Features:
    - Supports Ethereum (ETH), Binance Smart Chain (BSC), Avalanche (AVAX), and Polygon (MATIC).
 
 2. Database Usage:
-   - Utilizes SQLite to store Ethereum addresses.
+   - Utilizes SQLite to store Ethereum , POLYGON MATIC, AVALANCHE, BINANCE SMART CHAIN addresses.
 
 3. File Management:
    - `newaddresses.txt`: Tracks newly discovered addresses.
