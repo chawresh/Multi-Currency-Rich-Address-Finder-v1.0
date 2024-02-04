@@ -39,6 +39,21 @@ Getting Started:
 - Prerequisites:
   - Python 3.x
   - Additional dependencies (hdwallet, rich).
+  - import os
+    import logging
+    import traceback
+    from hdwallet import HDWallet
+    from hdwallet.symbols import BTC, ETH, TRX, DOGE, BCH, DASH, ZEC, LTC
+    import random
+    import time
+    from concurrent.futures import ProcessPoolExecutor
+    import sqlite3
+    from queue import Queue
+    from logging.handlers import QueueHandler, QueueListener
+    from threading import local
+    from rich import print
+    from rich.panel import Panel
+    from rich.console import Console
 
 - Configuration:
   - Parameters include log_file, sqlite_db_filename, found_addresses_filename, and addresses_file_path.
