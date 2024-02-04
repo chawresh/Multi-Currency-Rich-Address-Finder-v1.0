@@ -26,7 +26,7 @@ Legal Disclaimer and Warning:
 
 Features:
 1. Key Generation:
-   - Generates random private keys and addresses for various cryptocurrencies (BTC, ETH, TRX, DOGE, BCH, DASH, ZEC, LTC).
+   - Generates random private keys and addresses for various cryptocurrencies (BTC, ETH, BNB, AVAX, MATIC, TRX, DOGE, BCH, DASH, ZEC, LTC).
    
 2. Address Matching:
    - Checks if generated addresses match known "rich" addresses in the database
