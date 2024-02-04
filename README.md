@@ -33,7 +33,6 @@ Features:
 
 3. Logging and Information:
    - Logs information about found addresses.
-   - Provides details on addresses and balances.
 
 Getting Started:
 - Prerequisites:
