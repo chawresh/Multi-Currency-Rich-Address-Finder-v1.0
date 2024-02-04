@@ -1,4 +1,4 @@
-w"""
+"""
 Multi Currency Rich Address Finder v1.0
 
 Developed by Mustafa AKBAL
