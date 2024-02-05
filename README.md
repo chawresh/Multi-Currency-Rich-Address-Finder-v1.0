@@ -5,7 +5,7 @@ THE FASTEST WALLET CHECKER
 
 
 DOWNLOAD DATABASE WITH OVER 131.000.000 RICH ADDRESSES ( ONLY WITH LAST 8 DIGITS TO SCAN FASTER)
-
+GET CONTACT IF THE LINK NOT WORKING
 LINK:  https://drive.google.com/file/d/1QMdKjr-W3x2H9Vd1AyOZo-vRBoyiVjJy/view?usp=drive_link
 
 ![Alt text](https://github.com/chawresh/Multi-Currency-Rich-Address-Finder-v1.0/blob/52c3a2fb8559fdfcad6662b5c908f783e005e76e/screenshot.png)
