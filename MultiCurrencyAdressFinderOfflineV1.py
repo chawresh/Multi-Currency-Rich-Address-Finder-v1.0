@@ -250,7 +250,7 @@ def save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_
                 file.write(f"{address}\n")
             file.write(f"Mnemonic: {mnemonic}\n")
             file.write(f"Matched Address in Database: {matched_address}\n\n")
-            w += 1
+            win += 1
     except IOError as e:
         logging.info(f"Found Wallet: {private_key} {p2pkh_address} {p2sh_address} {p2pkh_btc} {p2sh_btc} {p2wpkh_btc} {ethaddr} {trxadd} {dgaddr} {bch_p2pkh} {bch_p2sh} {dash_p2pkh} {dash_p2sh} {zec_p2pkh} {zec_p2sh} {ltc_p2pkh} {ltc_p2sh}")
         logging.error(f'Writing File Error: {e}\n{traceback.format_exc()}')
