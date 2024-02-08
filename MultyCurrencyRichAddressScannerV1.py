@@ -182,7 +182,7 @@ async def process_address(address, block_numarası, en_son_block_numarası):
 
         balances = await check_address_balance(address)
 
-        if balances['eth_balance'] > 0.001 or balances['avax_balance'] > 0.001 or balances['polygon_balance'] > 0.001 or balances['bsc_balance'] > 0.001:
+        if balances['eth_balance'] > 0.01 or balances['avax_balance'] > 0.01 or balances['polygon_balance'] > 0.01 or balances['bsc_balance'] > 0.01:
             new_addresses.append(address)
             await write_to_new_addresses_file(address)
             clear_terminal()
