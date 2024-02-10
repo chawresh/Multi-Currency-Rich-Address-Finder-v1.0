@@ -64,7 +64,7 @@ style = "bold on grey11"
 
 log_file = "app_log.log"
 sqlite_db_filename = 'PubKeys.db' #change the database file path
-found_addresses_filename = 'found.txt' #change the found.txt file path
+found_addresses_filename = 'found.txt' #change the database file path
 addresses_file_path = 'newaddresses.txt' #if you want to add new rich addresses into the database 
 
 # Set logging level
@@ -93,7 +93,7 @@ class Colors:
     RESET = '\033[0m'
 
 # Variables to store address types of Bitcoin and other cryptocurrencies.
-p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, extra_variable = None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None
+p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, extra_variable = None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None
 
 def create_table(cursor):
     # Eğer yoksa, DataBase tablosunu oluştur
@@ -153,6 +153,7 @@ def generate_wallet():
             p2wpkh_in_p2sh_btc = hd_btc.p2wpkh_in_p2sh_address()
             p2wsh_in_p2sh_btc = hd_btc.p2wsh_in_p2sh_address()
             p2sh_btc = hd_btc.p2sh_address()
+            p2wsh_btc = hd_btc.p2wsh_address()
 
             # Ethereum address type
             global ethaddr
@@ -188,7 +189,7 @@ def generate_wallet():
 
             # Add all addresses to a list.
             global addresses
-            addresses = [p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc,
+            addresses = [p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc,
                          ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh]
 
             # Mnemonic
@@ -221,7 +222,7 @@ def add_to_database(cursor, conn, addresses_file_path):
         conn.commit()
         with open(addresses_file_path, 'w') as file:
             file.write("")
-            print(f'{Colors.RED}newaddresses.txt Addresses Are Erased.{Colors.RESET}')
+            print(f'{Colors.RED}/Users/chawresh/Desktop/yeniadresler.txt Addresses Are Erased.{Colors.RESET}')
     except sqlite3.Error as hata:
         print(f"SQLite Error: {hata}")
     except FileNotFoundError as hata:
@@ -240,9 +241,9 @@ def check_database(address_last_8, cursor):
         logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
         return False
 
-def save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_address, found_addresses_filename):
+def save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_address, filename):
     try:
-        with open(found_addresses_filename, 'a') as file:
+        with open(filename, 'a') as file:
             file.write(f"Private Key: {private_key}\n")
             file.write(f"Currency: {currency}\n")
             file.write("Addresses:\n")
@@ -252,7 +253,7 @@ def save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_
             file.write(f"Matched Address in Database: {matched_address}\n\n")
             win += 1
     except IOError as e:
-        logging.info(f"Found Wallet: {private_key} {p2pkh_address} {p2sh_address} {p2pkh_btc} {p2sh_btc} {p2wpkh_btc} {ethaddr} {trxadd} {dgaddr} {bch_p2pkh} {bch_p2sh} {dash_p2pkh} {dash_p2sh} {zec_p2pkh} {zec_p2sh} {ltc_p2pkh} {ltc_p2sh}")
+        logging.info(f"Found Wallet: {private_key} {p2pkh_address} {p2sh_address} {p2pkh_btc} {p2sh_btc} {p2wpkh_btc} {p2wsh_btc} {ethaddr} {trxadd} {dgaddr} {bch_p2pkh} {bch_p2sh} {dash_p2pkh} {dash_p2sh} {zec_p2pkh} {zec_p2sh} {ltc_p2pkh} {ltc_p2sh}")
         logging.error(f'Writing File Error: {e}\n{traceback.format_exc()}')
 
 def get_address_count(cursor):
@@ -277,7 +278,7 @@ def show_first_addresses(cursor, limit=10):
 
 def process_private_key(args):
     private_key, addresses, mnemonic, found_addresses_filename, sqlite_db_filename, conn, cursor = args
-    global total_found, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh
+    global total_found, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh
     try:
         conn, cursor = get_connection(sqlite_db_filename)
 
@@ -311,6 +312,8 @@ def get_currency_from_address(address, addresses):
             return "BTC p2wsh_in_p2sh_btc"
         elif address == p2sh_btc:
             return "BTC p2sh_btc"
+        elif address == p2wsh_btc:
+            return "BTC p2wsh_btc"
         elif address == ethaddr:
             return "ETH/BSC/AVAX/POLYGON"
         elif address == trxadd:
@@ -339,7 +342,7 @@ def get_currency_from_address(address, addresses):
         return "Address Is Not Found In The List"
 
 def main():
-    global private_key, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh
+    global private_key, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh
     global total_found
 
     try:
@@ -388,38 +391,46 @@ def main():
                     future = executor.submit(process_private_key, args)
                     clear_terminal()
                     infoPanel = (
-                        f"[gold1 on grey15]Total Rich Addresses In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
+                        f"[gold1 on grey15]Total Rich Address In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
                         f"[gold1 on grey15]Total Checked : [orange_red1]{private_key_count} [/]"
                         f"[gold1 on grey15]Win: [white]{win}[/]\n"
-                        f"PRIVATEKEY               : [grey54]{private_key}[/]\n"
-                        f"[gold1 on grey15]BTC p2pkh                : [white]{p2pkh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wpkh               : [white]{p2wpkh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wpkh_in_p2sh       : [white]{p2wpkh_in_p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wsh_in_p2sh        : [white]{p2wsh_in_p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2sh_btc             : [white]{p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]ETH/BSC/AVAX/POLYGON     : [white]{ethaddr}[/]\n"
-                        f"[gold1 on grey15]TRX                      : [white]{trxadd}[/]\n"
-                        f"[gold1 on grey15]DOGE                     : [white]{dgaddr}[/]\n"
-                        f"[gold1 on grey15]BCH bch_p2pkh            : [white]{bch_p2pkh}[/]\n"
-                        f"[gold1 on grey15]BCH bch_p2sh             : [white]{bch_p2sh}[/]\n"
-                        f"[gold1 on grey15]DASH dash_p2pkh          : [white]{dash_p2pkh}[/]\n"
-                        f"[gold1 on grey15]DASH dash_p2sh           : [white]{dash_p2sh}[/]\n"
-                        f"[gold1 on grey15]ZEC zec_p2pkh            : [white]{zec_p2pkh}[/]\n"
-                        f"[gold1 on grey15]ZEC zec_p2sh             : [white]{dash_p2sh}[/]\n"
-                        f"[gold1 on grey15]LTC ltc_p2pkh            : [white]{ltc_p2pkh}[/]\n"
-                        f"[gold1 on grey15]LTC ltc_p2sh             : [white]{ltc_p2sh}[/]\n"
-                        f"[gold1 on grey15]Found Wallets Info       : [white]{total_found}[/]"
+                        f"PRIVATEKEY             : [grey54]{private_key}[/]\n"
+                        f"[gold1 on grey15]BTC p2pkh              : [white]{p2pkh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wpkh             : [white]{p2wpkh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wpkh_in_p2sh     : [white]{p2wpkh_in_p2sh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wsh_in_p2sh.     : [white]{p2wsh_in_p2sh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2sh_btc           : [white]{p2sh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wsh_btc          : [white]{p2wsh_btc}[/]\n"
+                        f"[gold1 on grey15]ETH/BSC/AVAX/POLYGON   : [white]{ethaddr}[/]\n"
+                        f"[gold1 on grey15]TRX                    : [white]{trxadd}[/]\n"
+                        f"[gold1 on grey15]DOGE                   : [white]{dgaddr}[/]\n"
+                        f"[gold1 on grey15]BCH bch_p2pkh          : [white]{bch_p2pkh}[/]\n"
+                        f"[gold1 on grey15]BCH bch_p2sh           : [white]{bch_p2sh}[/]\n"
+                        f"[gold1 on grey15]DASH dash_p2pkh        : [white]{dash_p2pkh}[/]\n"
+                        f"[gold1 on grey15]DASH dash_p2sh         : [white]{dash_p2sh}[/]\n"
+                        f"[gold1 on grey15]ZEC zec_p2pkh          : [white]{zec_p2pkh}[/]\n"
+                        f"[gold1 on grey15]ZEC zec_p2sh           : [white]{dash_p2sh}[/]\n"
+                        f"[gold1 on grey15]LTC ltc_p2pkh          : [white]{ltc_p2pkh}[/]\n"
+                        f"[gold1 on grey15]LTC ltc_p2sh           : [white]{ltc_p2sh}[/]\n"
+                        f"[gold1 on grey15]Found Wallets Info     : [white]{total_found}[/]"
                     )
                     style = "bold on grey11"
                     console.print(
-                        Panel(str(infoPanel), title="[white]Multi Currency Rich Address Finder OFFLINE[/]",
+                        Panel(str(infoPanel), title="[white]Multi Currency Rich Address Finder[/]",
                               subtitle="[green_yellow blink] Developed By Mustafa AKBAL contact: mstf.akbal@gmail.com  Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5[/]", style="gold1"), style=style, justify="full"
                     )
                     time.sleep(wait_time)
 
             except KeyboardInterrupt:
                 logging.info("Program is closing. Found wallets are saved...")
-                with open(found_addresses_filename, 'a') as file:
+
+                add_to_database(cursor, conn, addresses_file_path)
+                get_address_count(cursor)
+
+                conn.close()
+                cursor.close()
+
+                with open(found_addresses_filename, 'w') as file:
                     file.write("Found Wallets:\n\n")
                     for entry in total_found:
                         file.write(f"Currency: {entry['Currency']}\n")
@@ -427,9 +438,8 @@ def main():
                         file.write(f"Matched Address in Database: {entry['Matched_address']}\n")
                         file.write(f"Mnemonic: {entry['Mnemonic']}\n\n")
                     file.write("\nTotal Found Wallets: " + str(len(total_found)))
+
                 logging.info(f"{Colors.GREEN}Found Wallets Are Saved.{Colors.RESET}")
-                conn.close()
-                cursor.close()
                 exit(0)
 
     except sqlite3.Error as e:
