@@ -1,5 +1,5 @@
 """
-Multi Currency Rich Address Scanner V1 For Multi Currency Rich Address Finder v1.0
+Multi Currency Rich Address Finder V1 For Multi Currency Rich Address Finder v1.0
 
 Developed by Mustafa AKBAL
 Contact: mstf.akbal@gmail.com
@@ -36,13 +36,15 @@ THE USE OF THE SOFTWARE IMPLIES THAT YOU UNDERSTAND AND ACCEPT THIS DISCLAIMER O
 
 """
 
-
 from web3 import Web3
 import sqlite3
 import os
 import sys
 from colorama import Fore, Style
 import asyncio
+import concurrent.futures
+from rich.traceback import install
+install()
 
 ethereum_node_url = 'https://eth.drpc.org'
 bsc_node_url = 'https://bsc-dataseed.binance.org'
@@ -61,11 +63,11 @@ db_path = 'PubKeys.db'
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
-cursor.execute("""
+cursor.execute('''
     CREATE TABLE IF NOT EXISTS DataBase (
-        PubKeys TEXT NOT NULL UNIQUE
+        PubKeys TEXT PRIMARY KEY
     )
-""")
+''')
 conn.commit()
 
 start_block_file = 'block.txt'
@@ -78,16 +80,16 @@ if os.path.exists(start_block_file):
             if start_block_content:
                 start_block = int(start_block_content)
         except ValueError:
-            print("Error: Invalid content in the block.txt file. Using the default start_block value.")
+            print("Error: Invalid content in block.txt file. Using default start_block value.")
 else:
-    print("Warning: block.txt not found. Using the default start_block value.")
+    print("Warning: block.txt not found. Using default start_block value.")
 
 def load_addresses_from_file():
     with open(new_addresses_file, 'r') as file:
         addresses = file.read().splitlines()
         new_addresses.extend(addresses)
         print(
-            f"{Fore.CYAN}Total {len(new_addresses)} new adresses are found. \n"
+            f"{Fore.CYAN}TOTAL {len(new_addresses)} NEW ADDRESSES FOUND \n"
         )
     return addresses
 
@@ -96,8 +98,6 @@ async def get_latest_block_number():
 
 async def get_transactions_in_block(block_number):
     block = web3.eth.get_block(block_number, full_transactions=True)
-    new_addresses = [] 
-    load_addresses_from_file()
     return block['transactions'] if block else []
 
 async def check_address_balance(address):
@@ -109,27 +109,27 @@ async def check_address_balance(address):
             balance_wei_bsc = web3_bsc.eth.get_balance(address)
             bsc_balance = web3_bsc.from_wei(balance_wei_bsc, 'ether')
         except Exception as e_bsc:
-            print(f'BSC Balance Hatası ({address}): {str(e_bsc)}')
+            print(f'BSC Balance Error ({address}): {str(e_bsc)}')
             bsc_balance = 0
 
         try:
             balance_wei_avax = web3_avax.eth.get_balance(address)
             avax_balance = web3_avax.from_wei(balance_wei_avax, 'ether')
         except Exception as e_avax:
-            print(f'AVAX Balance Hatası ({address}): {str(e_avax)}')
+            print(f'AVAX Balance Error ({address}): {str(e_avax)}')
             avax_balance = 0
 
         try:
             balance_wei_polygon = web3_polygon.eth.get_balance(address)
             polygon_balance = web3_polygon.from_wei(balance_wei_polygon, 'ether')
         except Exception as e_polygon:
-            print(f'Polygon Balance Hatası ({address}): {str(e_polygon)}')
+            print(f'Polygon Balance Error ({address}): {str(e_polygon)}')
             polygon_balance = 0
 
         return {'eth_balance': eth_balance, 'bsc_balance': bsc_balance, 'avax_balance': avax_balance, 'polygon_balance': polygon_balance}
     
     except Exception as e:
-        print(f'In general error while checking the address balance. ({address}): {str(e)}')
+        print(f'General error while checking address balance ({address}): {str(e)}')
         return {'eth_balance': 0, 'bsc_balance': 0, 'avax_balance': 0, 'polygon_balance': 0}
 
 async def write_to_new_addresses_file(address):
@@ -137,7 +137,7 @@ async def write_to_new_addresses_file(address):
         with open(new_addresses_file, 'a') as file:
             file.write(f"{address}\n")
     except Exception as e:
-        print(f'The following error occurred while writing to new addresses: {str(e)}')
+        print(f'Error while writing to new addresses file: {str(e)}')
 
 async def check_addresses_in_database(address):
     try:
@@ -148,9 +148,8 @@ async def check_addresses_in_database(address):
         return count > 0
 
     except Exception as e:
-        print(f'Error occurred during the verification of the address in the database: {str(e)}')
+        print(f'Error while checking address in database: {str(e)}')
         return False
-
 
 def clear_terminal():
     if sys.platform.startswith('win'):
@@ -171,56 +170,67 @@ async def process_block(block_number, latest_block_number):
                 await process_address(receiver, block_number, latest_block_number)
 
         except Exception as e:
-            print(f'İşlem hatası: {str(e)}')
+            print(f'Transaction error: {str(e)}')
 
-async def process_address(address, block_numarası, en_son_block_numarası):
+async def process_address(address, block_number, latest_block_number):
     global new_addresses
     try:
         if await check_addresses_in_database(address[-8:]):
             return
 
-
         balances = await check_address_balance(address)
 
-        if balances['eth_balance'] > 0.01 or balances['avax_balance'] > 0.01 or balances['polygon_balance'] > 0.01 or balances['bsc_balance'] > 0.01:
+        if balances['eth_balance'] > 0.00001 or balances['avax_balance'] > 0.00001 or balances['polygon_balance'] > 0.00001 or balances['bsc_balance'] > 0.00001:
             new_addresses.append(address)
             await write_to_new_addresses_file(address)
             clear_terminal()
             load_addresses_from_file()
             print(
-                f"{Fore.GREEN}TOTAL: {len(new_addresses)} {Fore.YELLOW}BLOCK: {block_numarası}/{en_son_block_numarası}\n"
-                f"{Fore.RED}ADDRESS: {address} {Fore.YELLOW}\nETH BALANCE: {balances['eth_balance']}\n"
-                f"{Fore.RED}AVAX BALANCE: {balances['avax_balance']}\n"
-                f"{Fore.GREEN}POLYGON BALANCE: {balances['polygon_balance']}\n"
-                f"{Fore.YELLOW}BNB BALANCE: {balances['bsc_balance']}{Style.RESET_ALL}")
+                f"{Fore.GREEN}TOTAL NEW ADDRESSES: {len(new_addresses)}{Style.RESET_ALL}\n"
+                f"{Fore.YELLOW}PROCESSED BLOCK: {block_number}/{latest_block_number}\n"
+                f"{Fore.RED}RELATED ADDRESS: {address}\n"
+                f"{Fore.YELLOW}ETH BALANCE: {balances['eth_balance']:.6f} ETH\n"
+                f"{Fore.RED}AVAX BALANCE: {balances['avax_balance']:.6f} AVAX\n"
+                f"{Fore.GREEN}POLYGON BALANCE: {balances['polygon_balance']:.6f} MATIC\n"
+                f"{Fore.YELLOW}BNB BALANCE: {balances['bsc_balance']:.6f} BNB\n"
+                f"{Fore.CYAN}------------------------{Style.RESET_ALL}\n"
+            )
+
             new_addresses = []
 
-    except Exception as hata:
-        print(f'Address processing error({address}): {str(hata)}')
+    except Exception as error:
+        print(f'Address processing error ({address}): {str(error)}')
 
     try:
         with open(start_block_file, 'w') as start_block_file_writer:
-            start_block_file_writer.write(str(block_numarası))
-    except Exception as hata:
-        print(f'Error: An error occurred while writing to the block.txt file: {str(hata)}')
+            start_block_file_writer.write(str(block_number))
+    except Exception as error:
+        print(f'Error: Failed to write to block.txt file: {str(error)}')
+
+async def process_blocks(start_block, end_block):
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        loop = asyncio.get_event_loop()
+        tasks = []
+        for block_number in range(start_block + 1, end_block + 1):
+            tasks.append(await loop.run_in_executor(executor, process_block, block_number, end_block))
+        await asyncio.gather(*tasks)
+
 
 async def main():
     try:
         current_block_number = start_block
         latest_block_number = await get_latest_block_number()
+        chunk_size = 10
 
-        tasks = []
-
-        for block_number in range(current_block_number + 1, latest_block_number + 1):
-            tasks.append(process_block(block_number, latest_block_number))
-
-        await asyncio.gather(*tasks)
+        for chunk_start in range(current_block_number, latest_block_number, chunk_size):
+            chunk_end = min(chunk_start + chunk_size, latest_block_number)
+            await process_blocks(chunk_start, chunk_end)
 
     except Exception as e:
         print(f'Main process error: {str(e)}')
     finally:
         conn.close()
-        print(f'{Fore.CYAN}The SQLite database connection has been successfully closed.{Style.RESET_ALL}')
+        print(f'{Fore.CYAN}SQLite database connection closed successfully.{Style.RESET_ALL}')
 
 if __name__ == "__main__":
     load_addresses_from_file()
