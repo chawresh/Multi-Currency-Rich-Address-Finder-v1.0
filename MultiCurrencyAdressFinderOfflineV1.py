@@ -419,14 +419,7 @@ def main():
 
             except KeyboardInterrupt:
                 logging.info("Program is closing. Found wallets are saved...")
-
-                add_to_database(cursor, conn, addresses_file_path)
-                get_address_count(cursor)
-
-                conn.close()
-                cursor.close()
-
-                with open(found_addresses_filename, 'w') as file:
+                with open(found_addresses_filename, 'a') as file:
                     file.write("Found Wallets:\n\n")
                     for entry in total_found:
                         file.write(f"Currency: {entry['Currency']}\n")
@@ -434,8 +427,9 @@ def main():
                         file.write(f"Matched Address in Database: {entry['Matched_address']}\n")
                         file.write(f"Mnemonic: {entry['Mnemonic']}\n\n")
                     file.write("\nTotal Found Wallets: " + str(len(total_found)))
-
                 logging.info(f"{Colors.GREEN}Found Wallets Are Saved.{Colors.RESET}")
+                conn.close()
+                cursor.close()
                 exit(0)
 
     except sqlite3.Error as e:
