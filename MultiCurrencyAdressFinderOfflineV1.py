@@ -409,7 +409,7 @@ def main():
                         f"[gold1 on grey15]DASH dash_p2pkh        : [white]{dash_p2pkh}[/]\n"
                         f"[gold1 on grey15]DASH dash_p2sh         : [white]{dash_p2sh}[/]\n"
                         f"[gold1 on grey15]ZEC zec_p2pkh          : [white]{zec_p2pkh}[/]\n"
-                        f"[gold1 on grey15]ZEC zec_p2sh           : [white]{dash_p2sh}[/]\n"
+                        f"[gold1 on grey15]ZEC zec_p2sh           : [white]{zec_p2sh}[/]\n"
                         f"[gold1 on grey15]LTC ltc_p2pkh          : [white]{ltc_p2pkh}[/]\n"
                         f"[gold1 on grey15]LTC ltc_p2sh           : [white]{ltc_p2sh}[/]\n"
                         f"[gold1 on grey15]Found Wallets Info     : [white]{total_found}[/]"
