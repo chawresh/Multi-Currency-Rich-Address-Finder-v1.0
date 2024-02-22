@@ -14,10 +14,10 @@ DATABASE DOWNLOAD LINK: https://drive.google.com/file/d/1kngLXO0ADuLJJu9xMCNU4yL
 
 """
 Overview:
-- Developed by `Mustafa AKBAL`
+- Developed by `Mustafa AKBAL` `Chawresh`
 - Contact: mstf.akbal@gmail.com
 - Instagram: `mstf.akbal`
-- Ethereum Address for Donations: `0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5`
+- Ethereum Addresses for Donations: `0xB8CD8e036aE16A19dc9cA44dc3CaB537aCBa4c6C`  ,  `0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5`
 - License: MIT License
 
 Legal Disclaimer and Warning:
@@ -82,7 +82,8 @@ License:
 - Licensed under the MIT License.
 
 Acknowledgments:
-- Thanks to `Mustafa AKBAL` for developing the tool.
+- Thanks to `Mustafa AKBAL` `Chawresh` for developing the tool.
+-Ethereum Addresses for Donations: `0xB8CD8e036aE16A19dc9cA44dc3CaB537aCBa4c6C`  ,  `0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5`
 
 These scripts serve as powerful tools for exploring and analyzing rich addresses in various cryptocurrencies. Users are advised to use them responsibly and comply with legal regulations.
 """
