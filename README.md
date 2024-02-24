@@ -39,7 +39,7 @@ Features:
 Getting Started:
 - Prerequisites:
   - Python 3.x
-  - Additional dependencies (hdwallet, rich, rich, sqlite, ).
+  - Additional dependencies (hdwallet, rich, sqlite, ).
 
 
 - Configuration:
