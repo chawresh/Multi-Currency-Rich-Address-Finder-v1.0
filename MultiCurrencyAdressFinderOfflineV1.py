@@ -218,7 +218,7 @@ def add_to_database(cursor, conn, addresses_file_path):
                 print(f'{Colors.GREEN}{address}  Addresses Are Addeding In Database{Colors.RESET}', end='\r')
                 print(f'{Colors.GREEN}{address} Total: {total} Addresses Are Added In Database{Colors.RESET}', end='\r')
             else:
-                print(f'{Colors.RED}{address} Already In Database{Colors.RESET}')
+                print(f'{Colors.RED}{address} Already In Database{Colors.RESET}', end='\r')
 
         conn.commit()
         with open(addresses_file_path, 'w') as file:
