@@ -215,14 +215,16 @@ def add_to_database(cursor, conn, addresses_file_path):
             if count == 0:
                 cursor.execute("INSERT INTO DataBase (PubKeys) VALUES (?)", (address,))
                 total += 1
-                print(f'{Colors.GREEN}{address} Total: {total} Adresses Are Added In Database{Colors.RESET}')
+                print(f'{Colors.GREEN}{address}  Addresses Are Addeding In Database{Colors.RESET}', end='\r')
+                print(f'{Colors.GREEN}{address} Total: {total} Addresses Are Added In Database{Colors.RESET}', end='\r')
             else:
                 print(f'{Colors.RED}{address} Already In Database{Colors.RESET}')
 
         conn.commit()
         with open(addresses_file_path, 'w') as file:
             file.write("")
-            print(f'{Colors.RED}/Users/chawresh/Desktop/yeniadresler.txt Addresses Are Erased.{Colors.RESET}')
+            print(f'{Colors.GREEN}{address} Total: {total} Addresses Are Added In Database{Colors.RESET}')
+            print(f'{Colors.RED}newaddresses.txt Addresses Are Erased.{Colors.RESET}')
     except sqlite3.Error as hata:
         print(f"SQLite Error: {hata}")
     except FileNotFoundError as hata:
