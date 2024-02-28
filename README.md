@@ -12,8 +12,7 @@ DATABASE DOWNLOAD LINK: https://drive.google.com/file/d/1kngLXO0ADuLJJu9xMCNU4yL
 
 ![Alt text](https://github.com/chawresh/Multi-Currency-Rich-Address-Finder-v1.0/blob/6f61c830be6b94bdb5bc2467f08e4b56bf2b7cc4/screenshot.png)
 
-"""
-Overview:
+
 - Developed by `Mustafa AKBAL` `Chawresh`
 - Contact: mstf.akbal@gmail.com
 - Instagram: `mstf.akbal`
@@ -48,8 +47,7 @@ Getting Started:
 
 # Multi-Currency Rich Address Scanner v1.0
 
-"""
-Overview:
+
 - Multi-currency rich address finder for Ethereum, Binance Smart Chain, Avalanche, and Polygon blockchains.
 - Checks for new addresses and their balances, storing results in `newaddresses.txt` and  Multi Currency Rich Address Finder v1.0 OFFLINE will add the new rich addresses into the `PubKeys.db` every 25000 scans
 
