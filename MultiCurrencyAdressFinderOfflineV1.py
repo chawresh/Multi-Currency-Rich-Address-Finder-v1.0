@@ -1,9 +1,9 @@
 """
 Multi Currency Rich Address Finder v1.0
 
-Developed by Mustafa AKBAL
+Developed by Mustafa AKBAL @chawresh
 Contact: mstf.akbal@gmail.com
-Ethereum Address for Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5
+Ethereum Address for Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5 , 0xB8CD8e036aE16A19dc9cA44dc3CaB537aCBa4c6C
 
 License: MIT License  
 Note: This application is the result of hard work and dedication. Please do not distribute it without permission and respect the effort put into its development.
@@ -37,7 +37,6 @@ THE USE OF THE SOFTWARE IMPLIES THAT YOU UNDERSTAND AND ACCEPT THIS DISCLAIMER O
 """
 
 
-
 import os
 import logging
 import traceback
@@ -53,6 +52,8 @@ from threading import local
 from rich import print
 from rich.panel import Panel
 from rich.console import Console
+from rich.traceback import install
+install()
 
 # Global variables
 _thread_local = local()
@@ -79,18 +80,6 @@ listener.start()
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 
-class Colors:
-    GREEN = '\033[92m'
-    RED = '\033[91m'
-    YELLOW = '\033[93m'
-    BLUE = '\033[94m'
-    MAGENTA = '\033[95m'
-    CYAN = '\033[96m'
-    WHITE = '\033[97m'
-    BLACK = '\033[30m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-    RESET = '\033[0m'
 
 # Variables to store address types of Bitcoin and other cryptocurrencies.
 p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, extra_variable = None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None
@@ -121,7 +110,7 @@ def get_connection(sqlite_db_filename):
         return None, None
 
 def generate_wallet():
-    with ProcessPoolExecutor(max_workers=16) as executor:
+    with ProcessPoolExecutor(max_workers=4) as executor:
         try:
             # Creat a Random Private Key
             private_key = "".join(random.choice("0123456789abcdef") for _ in range(64))
@@ -147,7 +136,7 @@ def generate_wallet():
             hd_ltc.from_private_key(private_key)
 
             # Bitcoin addresses types
-            global p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc
+            global p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc
             p2pkh_btc = hd_btc.p2pkh_address()
             p2wpkh_btc = hd_btc.p2wpkh_address()
             p2wpkh_in_p2sh_btc = hd_btc.p2wpkh_in_p2sh_address()
@@ -215,13 +204,14 @@ def add_to_database(cursor, conn, addresses_file_path):
             if count == 0:
                 cursor.execute("INSERT INTO DataBase (PubKeys) VALUES (?)", (address,))
                 total += 1
-                print(f'{Colors.GREEN}{address} Addresses Are Addeding In Database. Total: {total} Addresses Are Added In Database{Colors.RESET}', end='\r')
+                print(f'[gold1 on grey15]{address} [white]Address Is Addeding In Database. Total: [gold1 on grey15]{total} [white] Addresses Are Added In Database.[/]', end='\r')
             else:
-               print(f'{Colors.GREEN}Total: {total}{Colors.RED} {address} Already In Database{Colors.RESET}', end='\r')
+                print(f'[white]Total: [gold1 on grey15]{total}[gold1 on grey15] {address} [white]Already In Database.[/]', end='\r')
+
         conn.commit()
         with open(addresses_file_path, 'w') as file:
             file.write("")
-            print(f'{Colors.RED}Total: {total} Addresses Are Added In Database and Addresses in newaddresses.txt Are Erased.{Colors.RESET}')
+            print(f'[white]Total: [gold1 on grey15]{total} [white]Addresses Are Added In Database and Addresses in [gold1 on grey15]newaddresses.txt [white]Are Erased.[/]')
     except sqlite3.Error as hata:
         print(f"SQLite Error: {hata}")
     except FileNotFoundError as hata:
@@ -240,9 +230,9 @@ def check_database(address_last_8, cursor):
         logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
         return False
 
-def save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_address, filename):
+def save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_address, found_addresses_filename):
     try:
-        with open(filename, 'a') as file:
+        with open(found_addresses_filename, 'a') as file:
             file.write(f"Private Key: {private_key}\n")
             file.write(f"Currency: {currency}\n")
             file.write("Addresses:\n")
@@ -263,17 +253,6 @@ def get_address_count(cursor):
         logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
         return 0
 
-def show_first_addresses(cursor, limit=10):
-    try:
-        cursor.execute(f"SELECT * FROM DataBase LIMIT {limit}")
-        addresses = cursor.fetchall()
-
-        logging.info(f"First {limit} Address:")
-        for address in addresses:
-            logging.info(address[0])
-        time.sleep(5)
-    except sqlite3.Error as e:
-        logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
 
 def process_private_key(args):
     private_key, addresses, mnemonic, found_addresses_filename, sqlite_db_filename, conn, cursor = args
@@ -288,14 +267,14 @@ def process_private_key(args):
             address_last_8 = address[-8:]  # Take the last 8 digits of the address.
 
             if check_database(address_last_8, cursor):
-                logging.info(f"{Colors.GREEN}{address} Is Found In The Database.{Colors.RESET}")
+                logging.info(f"{address} Is Found In The Database. ")
                 matched_address = address
                 save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_address, found_addresses_filename)
-                logging.info(f"{Colors.GREEN}Saved.{Colors.RESET}")
+                logging.info(f"Saved.")
                 total_found.append({"Currency": currency, "Private_key": private_key, "\n""Matched_address": matched_address, "\n""Mnemonic": mnemonic }, "\n")
 
     except sqlite3.Error as e:
-        logging.error(f'{Colors.RED}Database Error: {e}{Colors.RESET}\n{traceback.format_exc()}')
+        logging.error(f' Database Error: {e} \n{traceback.format_exc()}')
     finally:
         pass
 
@@ -347,18 +326,15 @@ def main():
     try:
         conn, cursor = get_connection(sqlite_db_filename)
         create_table(cursor)
-
+        add_to_database(cursor, conn, addresses_file_path)
         address_count = get_address_count(cursor)
-        #print (f"Total Rich Address In Database: {address_count}")
-
-        #show_first_addresses(cursor)
 
         private_key_count = 0
         gerisayim = 0
         katsayi = 25000
-        wait_time = 0.0001
+        wait_time = 0.0000001
 
-        with ProcessPoolExecutor(max_workers=16) as executor:
+        with ProcessPoolExecutor(max_workers=6) as executor:
             try:
                 while True:
                     private_key_count += 1
@@ -375,10 +351,10 @@ def main():
                             with open(addresses_file_path, 'r') as dosya:
                                 veri = dosya.read()
                                 if not veri:
-                                    print(f"{Colors.RED} {addresses_file_path} New Rich Addresses Are Not Found.{Colors.RESET}")
+                                    print(f"{addresses_file_path} New Rich Addresses Are Not Found.")
                                     pass
                                 else:
-                                    print(f"{Colors.GREEN}{addresses_file_path} Some New Rich Addresses Found.{Colors.RESET}")
+                                    print(f"{addresses_file_path} Some New Rich Addresses Found.")
                                     add_to_database(cursor, conn, addresses_file_path)
                                     get_address_count(cursor)
                         except FileNotFoundError:
@@ -388,57 +364,53 @@ def main():
                     args = (private_key, addresses, mnemonic, found_addresses_filename, sqlite_db_filename, conn, cursor)
 
                     future = executor.submit(process_private_key, args)
-                    clear_terminal()
+
                     infoPanel = (
-                        f"[gold1 on grey15]Total Rich Address In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
+                        f"[gold1 on grey15]Total Rich Addresses In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
                         f"[gold1 on grey15]Total Checked : [orange_red1]{private_key_count} [/]"
                         f"[gold1 on grey15]Win: [white]{win}[/]\n"
-                        f"PRIVATEKEY             : [grey54]{private_key}[/]\n"
-                        f"[gold1 on grey15]BTC p2pkh              : [white]{p2pkh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wpkh             : [white]{p2wpkh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wpkh_in_p2sh     : [white]{p2wpkh_in_p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wsh_in_p2sh.     : [white]{p2wsh_in_p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2sh               : [white]{p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wsh              : [white]{p2wsh_btc}[/]\n"
-                        f"[gold1 on grey15]ETH/BSC/AVAX/POLYGON   : [white]{ethaddr}[/]\n"
-                        f"[gold1 on grey15]TRX                    : [white]{trxadd}[/]\n"
-                        f"[gold1 on grey15]DOGE                   : [white]{dgaddr}[/]\n"
-                        f"[gold1 on grey15]BCH bch_p2pkh          : [white]{bch_p2pkh}[/]\n"
-                        f"[gold1 on grey15]BCH bch_p2sh           : [white]{bch_p2sh}[/]\n"
-                        f"[gold1 on grey15]DASH dash_p2pkh        : [white]{dash_p2pkh}[/]\n"
-                        f"[gold1 on grey15]DASH dash_p2sh         : [white]{dash_p2sh}[/]\n"
-                        f"[gold1 on grey15]ZEC zec_p2pkh          : [white]{zec_p2pkh}[/]\n"
-                        f"[gold1 on grey15]ZEC zec_p2sh           : [white]{zec_p2sh}[/]\n"
-                        f"[gold1 on grey15]LTC ltc_p2pkh          : [white]{ltc_p2pkh}[/]\n"
-                        f"[gold1 on grey15]LTC ltc_p2sh           : [white]{ltc_p2sh}[/]\n"
-                        f"[gold1 on grey15]Found Wallets Info     : [white]{total_found}[/]"
+                        f"PRIVATEKEY               : [grey54]{private_key}[/]\n"
+                        f"[gold1 on grey15]BTC p2pkh                : [white]{p2pkh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wpkh               : [white]{p2wpkh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wpkh_in_p2sh       : [white]{p2wpkh_in_p2sh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wsh_in_p2sh        : [white]{p2wsh_in_p2sh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2sh                 : [white]{p2sh_btc}[/]\n"
+                        f"[gold1 on grey15]BTC p2wsh                : [white]{p2wsh_btc}[/]\n"
+                        f"[gold1 on grey15]ETH/BSC/AVAX/POLYGON     : [white]{ethaddr}[/]\n"
+                        f"[gold1 on grey15]TRX                      : [white]{trxadd}[/]\n"
+                        f"[gold1 on grey15]DOGE                     : [white]{dgaddr}[/]\n"
+                        f"[gold1 on grey15]BCH bch_p2pkh            : [white]{bch_p2pkh}[/]\n"
+                        f"[gold1 on grey15]BCH bch_p2sh             : [white]{bch_p2sh}[/]\n"
+                        f"[gold1 on grey15]DASH dash_p2pkh          : [white]{dash_p2pkh}[/]\n"
+                        f"[gold1 on grey15]DASH dash_p2sh           : [white]{dash_p2sh}[/]\n"
+                        f"[gold1 on grey15]ZEC zec_p2pkh            : [white]{zec_p2pkh}[/]\n"
+                        f"[gold1 on grey15]ZEC zec_p2sh             : [white]{zec_p2sh}[/]\n"
+                        f"[gold1 on grey15]LTC ltc_p2pkh            : [white]{ltc_p2pkh}[/]\n"
+                        f"[gold1 on grey15]LTC ltc_p2sh             : [white]{ltc_p2sh}[/]\n"
+                        f"[gold1 on grey15]Found Wallets Info       : [white]{total_found}[/]"
                     )
                     style = "bold on grey11"
+                    clear_terminal()
                     console.print(
-                        Panel(str(infoPanel), title="[white]Multi Currency Rich Address Finder[/]",
-                              subtitle="[green_yellow blink] Developed By Mustafa AKBAL contact: mstf.akbal@gmail.com  Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5[/]", style="gold1"), style=style, justify="full"
+                        Panel(str(infoPanel), title="[white]Multi Currency Rich Address Finder OFFLINE[/]",
+                              subtitle="[green_yellow] Developed By Mustafa AKBAL contact: mstf.akbal@gmail.com  Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5[/]", style="gold1"), style=style, justify="full"
                     )
                     time.sleep(wait_time)
 
             except KeyboardInterrupt:
                 logging.info("Program is closing. Found wallets are saved...")
 
-                add_to_database(cursor, conn, addresses_file_path)
-                get_address_count(cursor)
-
-                conn.close()
-                cursor.close()
-
-                with open(found_addresses_filename, 'w') as file:
-                    file.write("Found Wallets:\n\n")
+                with open(found_addresses_filename, 'a') as file:
                     for entry in total_found:
                         file.write(f"Currency: {entry['Currency']}\n")
                         file.write(f"Private Key: {entry['Private_key']}\n")
                         file.write(f"Matched Address in Database: {entry['Matched_address']}\n")
                         file.write(f"Mnemonic: {entry['Mnemonic']}\n\n")
-                    file.write("\nTotal Found Wallets: " + str(len(total_found)))
+                    
 
-                logging.info(f"{Colors.GREEN}Found Wallets Are Saved.{Colors.RESET}")
+                logging.info(f"Found Wallets Are Saved.")
+                conn.close()
+                cursor.close()
                 exit(0)
 
     except sqlite3.Error as e:
