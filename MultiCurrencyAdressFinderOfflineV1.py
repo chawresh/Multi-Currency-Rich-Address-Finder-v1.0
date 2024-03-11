@@ -369,7 +369,7 @@ def main():
                         f"[gold1 on grey15]Total Rich Addresses In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
                         f"[gold1 on grey15]Total Checked : [orange_red1]{private_key_count} [/]"
                         f"[gold1 on grey15]Win: [white]{win}[/]\n"
-                        f"PRIVATEKEY               : [grey54]{private_key}[/]\n"
+                        f"PRIVATE KEY              : [grey54]{private_key}[/]\n"
                         f"[gold1 on grey15]BTC p2pkh                : [white]{p2pkh_btc}[/]\n"
                         f"[gold1 on grey15]BTC p2wpkh               : [white]{p2wpkh_btc}[/]\n"
                         f"[gold1 on grey15]BTC p2wpkh_in_p2sh       : [white]{p2wpkh_in_p2sh_btc}[/]\n"
