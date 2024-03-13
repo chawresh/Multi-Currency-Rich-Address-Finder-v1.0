@@ -46,6 +46,9 @@ import concurrent.futures
 from rich.traceback import install
 install()
 
+
+appPath = os.path.dirname(os.path.abspath(__file__))
+
 ethereum_node_url = 'https://eth.drpc.org'
 bsc_node_url = 'https://bsc-dataseed.binance.org'
 avax_node_url = 'https://avalanche.drpc.org'
@@ -57,9 +60,9 @@ web3_avax = Web3(Web3.HTTPProvider(avax_node_url))
 web3_polygon = Web3(Web3.HTTPProvider(polygon_node_url))
 
 new_addresses = []
-new_addresses_file = 'newaddresses.txt'
+new_addresses_file = os.path.join(appPath, 'newaddresses.txt')
 
-db_path = 'PubKeys.db'
+db_path = os.path.join(appPath, 'PubKeys.db')
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
@@ -70,7 +73,7 @@ cursor.execute('''
 ''')
 conn.commit()
 
-start_block_file = 'block.txt'
+start_block_file = os.path.join(appPath, 'block.txt')
 start_block = 0
 
 if os.path.exists(start_block_file):
