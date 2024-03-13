@@ -10,7 +10,7 @@ IF THE DOWNLOAD LINK DOES NOT WORK, CONTACT ME
 
 DATABASE DOWNLOAD LINK: https://drive.google.com/file/d/1DPjz1ywSiIonntK_B_IKg3l4Nf7pipmE/view?usp=drive_link
 
-![Alt text]https://github.com/chawresh/Multi-Currency-Rich-Address-Finder-v1.0/blob/a6bd3c1bea545939fabe0510e98bacdaa0f2d4e8/screenshot.png
+![Alt text](https://github.com/chawresh/Multi-Currency-Rich-Address-Finder-v1.0/blob/a6bd3c1bea545939fabe0510e98bacdaa0f2d4e8/screenshot.png)
 
 
 - Developed by `Mustafa AKBAL` `Chawresh`
