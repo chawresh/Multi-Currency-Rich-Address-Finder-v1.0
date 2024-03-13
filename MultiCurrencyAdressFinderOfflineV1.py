@@ -393,6 +393,14 @@ def main():
                     )
                     style = "bold on grey11"
                     clear_terminal()
+                    print("""[gold1 on grey15]\
+                                                     ██████╗██╗  ██╗ █████╗ ██╗    ██╗██████╗ ███████╗███████╗██╗  ██╗
+                                                    ██╔════╝██║  ██║██╔══██╗██║    ██║██╔══██╗██╔════╝██╔════╝██║  ██║
+                                                    ██║     ███████║███████║██║ █╗ ██║██████╔╝█████╗  ███████╗███████║
+                                                    ██║     ██╔══██║██╔══██║██║███╗██║██╔══██╗██╔══╝  ╚════██║██╔══██║
+                                                    ╚██████╗██║  ██║██║  ██║╚███╔███╔╝██║  ██║███████╗███████║██║  ██║
+                                                     ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝[/]""")
+                    
                     console.print(
                         Panel(str(infoPanel), title="[white]Multi Currency Rich Address Finder OFFLINE[/]",
                               subtitle="[green_yellow] Developed By Mustafa AKBAL contact: mstf.akbal@gmail.com  Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5[/]", style="gold1"), style=style, justify="full"
@@ -424,6 +432,14 @@ def main():
 if __name__ == "__main__":
     try:
         clear_terminal()
+        print("""[gold1 on grey15]\
+                                         ██████╗██╗  ██╗ █████╗ ██╗    ██╗██████╗ ███████╗███████╗██╗  ██╗
+                                        ██╔════╝██║  ██║██╔══██╗██║    ██║██╔══██╗██╔════╝██╔════╝██║  ██║
+                                        ██║     ███████║███████║██║ █╗ ██║██████╔╝█████╗  ███████╗███████║
+                                        ██║     ██╔══██║██╔══██║██║███╗██║██╔══██╗██╔══╝  ╚════██║██╔══██║
+                                        ╚██████╗██║  ██║██║  ██║╚███╔███╔╝██║  ██║███████╗███████║██║  ██║
+                                         ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝[/]""")
+
         start = ("Launching the application... Please wait! Preparing the database may take a few minutes.")
         console.print(
             Panel(str(start), title="[white]Multi Currency Rich Address Finder[/]",
