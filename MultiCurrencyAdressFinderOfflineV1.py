@@ -55,6 +55,8 @@ from rich.console import Console
 from rich.traceback import install
 install()
 
+appPath = os.path.dirname(os.path.abspath(__file__))
+
 # Global variables
 _thread_local = local()
 address_count = 0
@@ -63,10 +65,10 @@ console = Console()
 win = 0
 style = "bold on grey11"
 
-log_file = "app_log.log"
-sqlite_db_filename = 'PubKeys.db' #change the database file path
-found_addresses_filename = 'found.txt' #change the database file path
-addresses_file_path = 'newaddresses.txt' #if you want to add new rich addresses into the database 
+log_file = os.path.join(appPath, "app_log.log")
+sqlite_db_filename = os.path.join(appPath, 'PubKeys.db') 
+found_addresses_filename = os.path.join(appPath, 'found.txt')  
+addresses_file_path = os.path.join(appPath, 'newaddresses.txt') 
 
 # Set logging level
 logging.basicConfig(level=logging.INFO)
