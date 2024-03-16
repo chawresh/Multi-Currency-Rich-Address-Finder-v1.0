@@ -15,26 +15,26 @@ DATABASE DOWNLOAD LINK: https://drive.google.com/file/d/1DPjz1ywSiIonntK_B_IKg3l
 
 Developed by Mustafa AKBAL 
 
-                               AUTHOR : Mustafa AKBAL e-mail: mstf.akbal@gmail.com 
-                               Telegram: @chawresho   Instagram: mstf.akbal
-                                ================= DONATE ADDRESSES ========================
-                               BTC p2pkh                : 1NWQ4fEprRs6a2WdYKSz45aN7d2pZQLWpj
-                               BTC p2wpkh               : bc1qa05lfk02xpp5qrjj9z7nkvel0jxdr6de8flu69
-                               BTC p2wpkh_in_p2sh       : 3EHkXJB6tqAnxtFHphvKge3x9jsXxkUfCi
-                               BTC p2wsh_in_p2sh        : 381WvfLxoE5TxosjDxH76w4N7WCxuuj8td
-                               BTC p2sh                 : 37EZzu8wpmrcK32bi1WtS71wCrjLSZ7NYc
-                               BTC p2wsh                : bc1qdja52dqcqy7wf4fz2uqgu0az2xuyrp2qz628fyyelkspq2vzrtms7e4tta
-                               ETH/BSC/AVAX/POLYGON     : 0x85b8F14fC0CfB76b82aE5eDaED9CA4CC13A4E0f3
-                               TRX                      : TNAGRcQGKQUpweLqwpTP8iALMyTLTDQQH1
-                               DOGE                     : DSeVbvBU9qmP72hEGuSYbqjxzkm7uPcrte
-                               BCH bch_p2pkh            : CdyHdhatjUqdUAR4E4mudbCPjkFERnznrh
-                               BCH bch_p2sh             : HC4gTha2g65GwCudZhB3QVYUEWkME6PdLA
-                               DASH dash_p2pkh          : XxCEtutip95giy7DQCmCucG9wxcWZYYiu8
-                               DASH dash_p2sh           : 7XxCq6R7dkxFJoZYydBPmV1b8QZiFsnKia
-                               ZEC zec_p2pkh            : t1fP14zexpkehAfZXUkG7BtgHNHDuGny4sZ
-                               ZEC zec_p2sh             : t3Q7B1EZ5o6eCug5VeSL1Zv7rTWvRD48Gx2
-                               LTC ltc_p2pkh            : LgjMKsYew679pqCniTSHL6e8KqQ6ddh4fC
-                               LTC ltc_p2sh             : MDSiJnYumti37YJVotWEFkGLXZKnPw3yCH
+                            AUTHOR : Mustafa AKBAL e-mail: mstf.akbal@gmail.com 
+                            Telegram: @chawresho   Instagram: mstf.akbal
+                             ================= DONATE ADDRESSES ========================
+                            BTC p2pkh                : 1NWQ4fEprRs6a2WdYKSz45aN7d2pZQLWpj
+                            BTC p2wpkh               : bc1qa05lfk02xpp5qrjj9z7nkvel0jxdr6de8flu69
+                            BTC p2wpkh_in_p2sh       : 3EHkXJB6tqAnxtFHphvKge3x9jsXxkUfCi
+                            BTC p2wsh_in_p2sh        : 381WvfLxoE5TxosjDxH76w4N7WCxuuj8td
+                            BTC p2sh                 : 37EZzu8wpmrcK32bi1WtS71wCrjLSZ7NYc
+                            BTC p2wsh                : bc1qdja52dqcqy7wf4fz2uqgu0az2xuyrp2qz628fyyelkspq2vzrtms7e4tta
+                            ETH/BSC/AVAX/POLYGON     : 0x85b8F14fC0CfB76b82aE5eDaED9CA4CC13A4E0f3
+                            TRX                      : TNAGRcQGKQUpweLqwpTP8iALMyTLTDQQH1
+                            DOGE                     : DSeVbvBU9qmP72hEGuSYbqjxzkm7uPcrte
+                            BCH bch_p2pkh            : CdyHdhatjUqdUAR4E4mudbCPjkFERnznrh
+                            BCH bch_p2sh             : HC4gTha2g65GwCudZhB3QVYUEWkME6PdLA
+                            DASH dash_p2pkh          : XxCEtutip95giy7DQCmCucG9wxcWZYYiu8
+                            DASH dash_p2sh           : 7XxCq6R7dkxFJoZYydBPmV1b8QZiFsnKia
+                            ZEC zec_p2pkh            : t1fP14zexpkehAfZXUkG7BtgHNHDuGny4sZ
+                            ZEC zec_p2sh             : t3Q7B1EZ5o6eCug5VeSL1Zv7rTWvRD48Gx2
+                            LTC ltc_p2pkh            : LgjMKsYew679pqCniTSHL6e8KqQ6ddh4fC
+                            LTC ltc_p2sh             : MDSiJnYumti37YJVotWEFkGLXZKnPw3yCH
 
 Legal Disclaimer and Warning:
 - Strict prohibition on illegal activities.
