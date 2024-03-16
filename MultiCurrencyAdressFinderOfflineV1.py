@@ -1,9 +1,34 @@
 """
 Multi Currency Rich Address Finder v1.0
 
-Developed by Mustafa AKBAL @chawresh
-Contact: mstf.akbal@gmail.com
-Ethereum Address for Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5 , 0xB8CD8e036aE16A19dc9cA44dc3CaB537aCBa4c6C
+Developed by Mustafa AKBAL 
+                                             ██████╗██╗  ██╗ █████╗ ██╗    ██╗██████╗ ███████╗███████╗██╗  ██╗
+                                            ██╔════╝██║  ██║██╔══██╗██║    ██║██╔══██╗██╔════╝██╔════╝██║  ██║
+                                            ██║     ███████║███████║██║ █╗ ██║██████╔╝█████╗  ███████╗███████║
+                                            ██║     ██╔══██║██╔══██║██║███╗██║██╔══██╗██╔══╝  ╚════██║██╔══██║
+                                            ╚██████╗██║  ██║██║  ██║╚███╔███╔╝██║  ██║███████╗███████║██║  ██║
+                                             ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
+                                            AUTHOR : Mustafa AKBAL e-mail: mstf.akbal@gmail.com 
+                                            Telegram: @chawresho   Instagram: mstf.akbal
+                                             ================= DONATE ADDRESSES ========================
+                                            BTC p2pkh                : 1NWQ4fEprRs6a2WdYKSz45aN7d2pZQLWpj
+                                            BTC p2wpkh               : bc1qa05lfk02xpp5qrjj9z7nkvel0jxdr6de8flu69
+                                            BTC p2wpkh_in_p2sh       : 3EHkXJB6tqAnxtFHphvKge3x9jsXxkUfCi
+                                            BTC p2wsh_in_p2sh        : 381WvfLxoE5TxosjDxH76w4N7WCxuuj8td
+                                            BTC p2sh                 : 37EZzu8wpmrcK32bi1WtS71wCrjLSZ7NYc
+                                            BTC p2wsh                : bc1qdja52dqcqy7wf4fz2uqgu0az2xuyrp2qz628fyyelkspq2vzrtms7e4tta
+                                            ETH/BSC/AVAX/POLYGON     : 0x85b8F14fC0CfB76b82aE5eDaED9CA4CC13A4E0f3
+                                            TRX                      : TNAGRcQGKQUpweLqwpTP8iALMyTLTDQQH1
+                                            DOGE                     : DSeVbvBU9qmP72hEGuSYbqjxzkm7uPcrte
+                                            BCH bch_p2pkh            : CdyHdhatjUqdUAR4E4mudbCPjkFERnznrh
+                                            BCH bch_p2sh             : HC4gTha2g65GwCudZhB3QVYUEWkME6PdLA
+                                            DASH dash_p2pkh          : XxCEtutip95giy7DQCmCucG9wxcWZYYiu8
+                                            DASH dash_p2sh           : 7XxCq6R7dkxFJoZYydBPmV1b8QZiFsnKia
+                                            ZEC zec_p2pkh            : t1fP14zexpkehAfZXUkG7BtgHNHDuGny4sZ
+                                            ZEC zec_p2sh             : t3Q7B1EZ5o6eCug5VeSL1Zv7rTWvRD48Gx2
+                                            LTC ltc_p2pkh            : LgjMKsYew679pqCniTSHL6e8KqQ6ddh4fC
+                                            LTC ltc_p2sh             : MDSiJnYumti37YJVotWEFkGLXZKnPw3yCH
+
 
 License: MIT License  
 Note: This application is the result of hard work and dedication. Please do not distribute it without permission and respect the effort put into its development.
@@ -55,13 +80,34 @@ from rich.console import Console
 from rich.traceback import install
 install()
 
+
 author = ("""[gold1 on grey15]\
-                             ██████╗██╗  ██╗ █████╗ ██╗    ██╗██████╗ ███████╗███████╗██╗  ██╗
-                            ██╔════╝██║  ██║██╔══██╗██║    ██║██╔══██╗██╔════╝██╔════╝██║  ██║
-                            ██║     ███████║███████║██║ █╗ ██║██████╔╝█████╗  ███████╗███████║
-                            ██║     ██╔══██║██╔══██║██║███╗██║██╔══██╗██╔══╝  ╚════██║██╔══██║
-                            ╚██████╗██║  ██║██║  ██║╚███╔███╔╝██║  ██║███████╗███████║██║  ██║
-                             ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝[/]""")
+                                             ██████╗██╗  ██╗ █████╗ ██╗    ██╗██████╗ ███████╗███████╗██╗  ██╗
+                                            ██╔════╝██║  ██║██╔══██╗██║    ██║██╔══██╗██╔════╝██╔════╝██║  ██║
+                                            ██║     ███████║███████║██║ █╗ ██║██████╔╝█████╗  ███████╗███████║
+                                            ██║     ██╔══██║██╔══██║██║███╗██║██╔══██╗██╔══╝  ╚════██║██╔══██║
+                                            ╚██████╗██║  ██║██║  ██║╚███╔███╔╝██║  ██║███████╗███████║██║  ██║
+                                             ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
+                                            AUTHOR : Mustafa AKBAL e-mail: mstf.akbal@gmail.com 
+                                            Telegram: @chawresho   Instagram: mstf.akbal
+                                             ================= DONATE ADDRESSES ========================
+                                            BTC p2pkh                : 1NWQ4fEprRs6a2WdYKSz45aN7d2pZQLWpj
+                                            BTC p2wpkh               : bc1qa05lfk02xpp5qrjj9z7nkvel0jxdr6de8flu69
+                                            BTC p2wpkh_in_p2sh       : 3EHkXJB6tqAnxtFHphvKge3x9jsXxkUfCi
+                                            BTC p2wsh_in_p2sh        : 381WvfLxoE5TxosjDxH76w4N7WCxuuj8td
+                                            BTC p2sh                 : 37EZzu8wpmrcK32bi1WtS71wCrjLSZ7NYc
+                                            BTC p2wsh                : bc1qdja52dqcqy7wf4fz2uqgu0az2xuyrp2qz628fyyelkspq2vzrtms7e4tta
+                                            ETH/BSC/AVAX/POLYGON     : 0x85b8F14fC0CfB76b82aE5eDaED9CA4CC13A4E0f3
+                                            TRX                      : TNAGRcQGKQUpweLqwpTP8iALMyTLTDQQH1
+                                            DOGE                     : DSeVbvBU9qmP72hEGuSYbqjxzkm7uPcrte
+                                            BCH bch_p2pkh            : CdyHdhatjUqdUAR4E4mudbCPjkFERnznrh
+                                            BCH bch_p2sh             : HC4gTha2g65GwCudZhB3QVYUEWkME6PdLA
+                                            DASH dash_p2pkh          : XxCEtutip95giy7DQCmCucG9wxcWZYYiu8
+                                            DASH dash_p2sh           : 7XxCq6R7dkxFJoZYydBPmV1b8QZiFsnKia
+                                            ZEC zec_p2pkh            : t1fP14zexpkehAfZXUkG7BtgHNHDuGny4sZ
+                                            ZEC zec_p2sh             : t3Q7B1EZ5o6eCug5VeSL1Zv7rTWvRD48Gx2
+                                            LTC ltc_p2pkh            : LgjMKsYew679pqCniTSHL6e8KqQ6ddh4fC
+                                            LTC ltc_p2sh             : MDSiJnYumti37YJVotWEFkGLXZKnPw3yCH[/]""")
 
 appPath = os.path.dirname(os.path.abspath(__file__))
 
@@ -74,9 +120,9 @@ win = 0
 style = "bold on grey11"
 
 log_file = os.path.join(appPath, "app_log.log")
-sqlite_db_filename = os.path.join(appPath, 'PubKeys.db') 
-found_addresses_filename = os.path.join(appPath, 'found.txt')  
-addresses_file_path = os.path.join(appPath, 'newaddresses.txt') 
+sqlite_db_filename = os.path.join(appPath, 'PubKeys.db')
+found_addresses_filename = os.path.join(appPath, 'found.txt')
+addresses_file_path = os.path.join(appPath, 'newaddresses.txt')
 
 # Set logging level
 logging.basicConfig(level=logging.INFO)
@@ -191,10 +237,7 @@ def generate_wallet():
             addresses = [p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc,
                          ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh]
 
-            # Mnemonic
-            mnemonic = hd_btc.mnemonic
-
-            return private_key, addresses, mnemonic
+            return private_key, addresses
         except Exception as e:
             logging.error(f'Creating Wallet Error: {e}\n{traceback.format_exc()}')
             return None, None, None
@@ -214,7 +257,8 @@ def add_to_database(cursor, conn, addresses_file_path):
             if count == 0:
                 cursor.execute("INSERT INTO DataBase (PubKeys) VALUES (?)", (address,))
                 total += 1
-                print(f'[gold1 on grey15]{address} [white]Address Is Addeding In Database. Total: [gold1 on grey15]{total} [white] Addresses Are Added In Database.[/]', end='\r')
+                #print(f'{address}  Addresses Are Addeding In Database. ', end='\r')
+                print(f'[white]Total: [gold1 on grey15]{total}[gold1 on grey15] {address} [white]Address Is Addeding In Database. Total: [gold1 on grey15]{total} [white] Addresses Are Added In Database.[/]', end='\r')
             else:
                 print(f'[white]Total: [gold1 on grey15]{total}[gold1 on grey15] {address} [white]Already In Database.[/]', end='\r')
 
@@ -240,7 +284,7 @@ def check_database(address_last_8, cursor):
         logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
         return False
 
-def save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_address, found_addresses_filename):
+def save_to_found_addresses(private_key, addresses, currency, matched_address, found_addresses_filename):
     try:
         with open(found_addresses_filename, 'a') as file:
             file.write(f"Private Key: {private_key}\n")
@@ -248,7 +292,6 @@ def save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_
             file.write("Addresses:\n")
             for address in addresses:
                 file.write(f"{address}\n")
-            file.write(f"Mnemonic: {mnemonic}\n")
             file.write(f"Matched Address in Database: {matched_address}\n\n")
             win += 1
     except IOError as e:
@@ -263,9 +306,20 @@ def get_address_count(cursor):
         logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
         return 0
 
+def show_first_addresses(cursor, limit=10):
+    try:
+        cursor.execute(f"SELECT * FROM DataBase LIMIT {limit}")
+        addresses = cursor.fetchall()
+
+        logging.info(f"First {limit} Address:")
+        for address in addresses:
+            logging.info(address[0])
+        time.sleep(5)
+    except sqlite3.Error as e:
+        logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
 
 def process_private_key(args):
-    private_key, addresses, mnemonic, found_addresses_filename, sqlite_db_filename, conn, cursor = args
+    private_key, addresses, found_addresses_filename, sqlite_db_filename, conn, cursor = args
     global total_found, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh
     try:
         conn, cursor = get_connection(sqlite_db_filename)
@@ -279,9 +333,9 @@ def process_private_key(args):
             if check_database(address_last_8, cursor):
                 logging.info(f"{address} Is Found In The Database. ")
                 matched_address = address
-                save_to_found_addresses(private_key, addresses, mnemonic, currency, matched_address, found_addresses_filename)
+                save_to_found_addresses(private_key, addresses, currency, matched_address, found_addresses_filename)
                 logging.info(f"Saved.")
-                total_found.append({"Currency": currency, "Private_key": private_key, "\n""Matched_address": matched_address, "\n""Mnemonic": mnemonic }, "\n")
+                total_found.append({"Currency": currency, "Private_key": private_key, "\n""Matched_address": matched_address}, "\n")
 
     except sqlite3.Error as e:
         logging.error(f' Database Error: {e} \n{traceback.format_exc()}')
@@ -339,16 +393,17 @@ def main():
         add_to_database(cursor, conn, addresses_file_path)
         address_count = get_address_count(cursor)
 
-        private_key_count = 0
+
+        private_key_addresses_count = 0
         gerisayim = 0
-        katsayi = 25000
+        katsayi = 10000
         wait_time = 0.0000001
 
         with ProcessPoolExecutor(max_workers=6) as executor:
             try:
                 while True:
-                    private_key_count += 1
-                    private_key, addresses, mnemonic = generate_wallet()
+                    private_key_addresses_count += 20
+                    private_key, addresses = generate_wallet()
 
                     if private_key is None:
                         pass
@@ -356,7 +411,7 @@ def main():
                     gerisayim += 1
 
                     if gerisayim >= katsayi:
-                        katsayi += 25000
+                        katsayi += 10000
                         try:
                             with open(addresses_file_path, 'r') as dosya:
                                 veri = dosya.read()
@@ -371,13 +426,13 @@ def main():
                             print(f"{addresses_file_path} File Is Not Found")
 
 
-                    args = (private_key, addresses, mnemonic, found_addresses_filename, sqlite_db_filename, conn, cursor)
+                    args = (private_key, addresses, found_addresses_filename, sqlite_db_filename, conn, cursor)
 
                     future = executor.submit(process_private_key, args)
 
                     infoPanel = (
                         f"[gold1 on grey15]Total Rich Addresses In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
-                        f"[gold1 on grey15]Total Checked : [orange_red1]{private_key_count} [/]"
+                        f"[gold1 on grey15]Total Checked : [orange_red1]{private_key_addresses_count} [/]"
                         f"[gold1 on grey15]Win: [white]{win}[/]\n"
                         f"PRIVATE KEY              : [grey54]{private_key}[/]\n"
                         f"[gold1 on grey15]BTC p2pkh                : [white]{p2pkh_btc}[/]\n"
@@ -402,10 +457,11 @@ def main():
                     style = "bold on grey11"
                     clear_terminal()
                     print(author)
-                    
+
+
                     console.print(
                         Panel(str(infoPanel), title="[white]Multi Currency Rich Address Finder OFFLINE[/]",
-                              subtitle="[green_yellow] Developed By Mustafa AKBAL contact: mstf.akbal@gmail.com  Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5[/]", style="gold1"), style=style, justify="full"
+                              subtitle="[green_yellow] Developed By Mustafa AKBAL contact: mstf.akbal@gmail.com [/]", style="gold1"), style=style, justify="full"
                     )
                     time.sleep(wait_time)
 
@@ -417,8 +473,6 @@ def main():
                         file.write(f"Currency: {entry['Currency']}\n")
                         file.write(f"Private Key: {entry['Private_key']}\n")
                         file.write(f"Matched Address in Database: {entry['Matched_address']}\n")
-                        file.write(f"Mnemonic: {entry['Mnemonic']}\n\n")
-                    
 
                 logging.info(f"Found Wallets Are Saved.")
                 conn.close()
@@ -435,6 +489,7 @@ if __name__ == "__main__":
     try:
         clear_terminal()
         print(author)
+
 
         start = ("Launching the application... Please wait! Preparing the database may take a few minutes.")
         console.print(
