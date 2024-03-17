@@ -24,6 +24,8 @@ Developed by Mustafa AKBAL
                                             ZEC zec_p2pkh            : t1Rt1BSSzQRuWymR5wf189kckaYwkSSQAb1
                                             LTC ltc_p2pkh            : LTEMSKLgWmMydw4MBNBJHxabY77wp1zyZ6
                                             LTC ltc_p2sh             : MSbwSBhDaeRPjUq7WbWJY9TKiF4WpZbBd8
+                                            LTC ltc_p2wsh            : ltc1q47rduwq76v4fteqvxm8p9axq39nq25kurgwlyaefmyqz3nhyc8rsmce759
+                                            LTC ltc_p2wpkh           : ltc1q2l29nc6puvuk0rn449wf6l8rm62wuxst6qkkpv
 
 
 License: MIT License  
@@ -87,6 +89,8 @@ author = ("""[gold1 on grey15]\
                                             AUTHOR : Mustafa AKBAL e-mail: mstf.akbal@gmail.com 
                                             Telegram: @chawresho   Instagram: mstf.akbal
                                              ================= DONATE ADDRESSES ========================
+                                            Compressed Address: 191QB72rS77vP8NC1EC11wWqKtkfbm5SM8
+                                            UnCompressed Address: 1HTZrCDM9Qsp7aztvbeSo5cP7u9dbwn6Qr
                                             BTC p2pkh                : 191QB72rS77vP8NC1EC11wWqKtkfbm5SM8
                                             BTC p2wpkh               : bc1q2l29nc6puvuk0rn449wf6l8rm62wuxst7uvjeu
                                             BTC p2wpkh_in_p2sh       : 3AkjfoQn494K5FBdqMrnQRr4UsWji7Az62
@@ -99,7 +103,9 @@ author = ("""[gold1 on grey15]\
                                             DASH dash_p2pkh          : XihF1MgkPpLWY4xms7WDsUCdAELMiBXCFZ
                                             ZEC zec_p2pkh            : t1Rt1BSSzQRuWymR5wf189kckaYwkSSQAb1
                                             LTC ltc_p2pkh            : LTEMSKLgWmMydw4MBNBJHxabY77wp1zyZ6
-                                            LTC ltc_p2sh             : MSbwSBhDaeRPjUq7WbWJY9TKiF4WpZbBd8[/]""")
+                                            LTC ltc_p2sh             : MSbwSBhDaeRPjUq7WbWJY9TKiF4WpZbBd8
+                                            LTC ltc_p2wsh            : ltc1q47rduwq76v4fteqvxm8p9axq39nq25kurgwlyaefmyqz3nhyc8rsmce759
+                                            LTC ltc_p2wpkh           : ltc1q2l29nc6puvuk0rn449wf6l8rm62wuxst6qkkpv[/]""")
 
 appPath = os.path.dirname(os.path.abspath(__file__))
 
