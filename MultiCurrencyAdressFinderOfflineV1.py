@@ -103,30 +103,6 @@ author = ("""[gold1 on grey15]\
 
 appPath = os.path.dirname(os.path.abspath(__file__))
 
-UnCompressed Address: 1HTZrCDM9Qsp7aztvbeSo5cP7u9dbwn6Qr
-Bitcoin P2PKH: 191QB72rS77vP8NC1EC11wWqKtkfbm5SM8
-Bitcoin P2SH: 3LPo8JHFdXZxvyZDQiWxiWCvPYU4oUhyHz
-Bitcoin P2WPKH: bc1q2l29nc6puvuk0rn449wf6l8rm62wuxst7uvjeu
-Bitcoin P2WSH: bc1q47rduwq76v4fteqvxm8p9axq39nq25kurgwlyaefmyqz3nhyc8rscuhwwq
-Bitcoin P2WPKH in Segwit: 3AkjfoQn494K5FBdqMrnQRr4UsWji7Az62
-Bitcoin P2WSH in Segwit: 3Cf3J2jw4xx8DVuwHDiQuVrsRoroUgzd7M
-Litecoin P2PKH: LTEMSKLgWmMydw4MBNBJHxabY77wp1zyZ6
-Litecoin P2SH: MSbwSBhDaeRPjUq7WbWJY9TKiF4WpZbBd8
-Litecoin P2WSH: ltc1q47rduwq76v4fteqvxm8p9axq39nq25kurgwlyaefmyqz3nhyc8rsmce759
-Litecoin P2WPKH: ltc1q2l29nc6puvuk0rn449wf6l8rm62wuxst6qkkpv
-Ethereum: 0x279f020A74BfE5Ba6a539B0f523D491A4122d18D
-Tron: TDahqcDTkM2qnfoCPfed1YhcB5Eocc2Cwe
-Dogecoin: DD9ViMyVjX2Cv8YnjpBZZhgSD2Uy1NQVbk
-DASH: XihF1MgkPpLWY4xms7WDsUCdAELMiBXCFZ
-DigiByte: DD9ViMyVjX2Cv8YnjpBZZhgSD2Uy1NQVbk
-Ravencoin: RHHbFcv92vvVT8jPUQB87Tr36ADGK2nhYZ
-QTUM: QUcPHQKZcZzjpGTDRZWV9DJTq9hNtNRypo
-zCASH: t1Rt1BSSzQRuWymR5wf189kckaYwkSSQAb1 
-
-
-
-
-
 
 # Global variables
 _thread_local = local()
