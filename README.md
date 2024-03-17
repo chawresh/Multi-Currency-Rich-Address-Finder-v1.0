@@ -54,6 +54,7 @@ Getting Started:
 - Prerequisites:
   - Python 3.x
   - Additional dependencies (hdwallet, rich, rich, sqlite, ).
+
 Run the code:
 python3 Multi-Currency-Rich-Address-Finder-v1.0
 
