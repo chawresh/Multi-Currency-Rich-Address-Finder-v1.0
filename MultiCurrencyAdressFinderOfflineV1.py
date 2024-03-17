@@ -11,23 +11,19 @@ Developed by Mustafa AKBAL
                                             AUTHOR : Mustafa AKBAL e-mail: mstf.akbal@gmail.com 
                                             Telegram: @chawresho   Instagram: mstf.akbal
                                              ================= DONATE ADDRESSES ========================
-                                            BTC p2pkh                : 1NWQ4fEprRs6a2WdYKSz45aN7d2pZQLWpj
-                                            BTC p2wpkh               : bc1qa05lfk02xpp5qrjj9z7nkvel0jxdr6de8flu69
-                                            BTC p2wpkh_in_p2sh       : 3EHkXJB6tqAnxtFHphvKge3x9jsXxkUfCi
-                                            BTC p2wsh_in_p2sh        : 381WvfLxoE5TxosjDxH76w4N7WCxuuj8td
-                                            BTC p2sh                 : 37EZzu8wpmrcK32bi1WtS71wCrjLSZ7NYc
-                                            BTC p2wsh                : bc1qdja52dqcqy7wf4fz2uqgu0az2xuyrp2qz628fyyelkspq2vzrtms7e4tta
-                                            ETH/BSC/AVAX/POLYGON     : 0x85b8F14fC0CfB76b82aE5eDaED9CA4CC13A4E0f3
-                                            TRX                      : TNAGRcQGKQUpweLqwpTP8iALMyTLTDQQH1
-                                            DOGE                     : DSeVbvBU9qmP72hEGuSYbqjxzkm7uPcrte
-                                            BCH bch_p2pkh            : CdyHdhatjUqdUAR4E4mudbCPjkFERnznrh
-                                            BCH bch_p2sh             : HC4gTha2g65GwCudZhB3QVYUEWkME6PdLA
-                                            DASH dash_p2pkh          : XxCEtutip95giy7DQCmCucG9wxcWZYYiu8
-                                            DASH dash_p2sh           : 7XxCq6R7dkxFJoZYydBPmV1b8QZiFsnKia
-                                            ZEC zec_p2pkh            : t1fP14zexpkehAfZXUkG7BtgHNHDuGny4sZ
-                                            ZEC zec_p2sh             : t3Q7B1EZ5o6eCug5VeSL1Zv7rTWvRD48Gx2
-                                            LTC ltc_p2pkh            : LgjMKsYew679pqCniTSHL6e8KqQ6ddh4fC
-                                            LTC ltc_p2sh             : MDSiJnYumti37YJVotWEFkGLXZKnPw3yCH
+                                            BTC p2pkh                : 191QB72rS77vP8NC1EC11wWqKtkfbm5SM8
+                                            BTC p2wpkh               : bc1q2l29nc6puvuk0rn449wf6l8rm62wuxst7uvjeu
+                                            BTC p2wpkh_in_p2sh       : 3AkjfoQn494K5FBdqMrnQRr4UsWji7Az62
+                                            BTC p2wsh_in_p2sh        : 3Cf3J2jw4xx8DVuwHDiQuVrsRoroUgzd7M
+                                            BTC p2sh                 : 3LPo8JHFdXZxvyZDQiWxiWCvPYU4oUhyHz
+                                            BTC p2wsh                : bc1q47rduwq76v4fteqvxm8p9axq39nq25kurgwlyaefmyqz3nhyc8rscuhwwq
+                                            ETH/BSC/AVAX/POLYGON     : 0x279f020A74BfE5Ba6a539B0f523D491A4122d18D
+                                            TRX                      : TDahqcDTkM2qnfoCPfed1YhcB5Eocc2Cwe
+                                            DOGE                     : DD9ViMyVjX2Cv8YnjpBZZhgSD2Uy1NQVbk
+                                            DASH dash_p2pkh          : XihF1MgkPpLWY4xms7WDsUCdAELMiBXCFZ
+                                            ZEC zec_p2pkh            : t1Rt1BSSzQRuWymR5wf189kckaYwkSSQAb1
+                                            LTC ltc_p2pkh            : LTEMSKLgWmMydw4MBNBJHxabY77wp1zyZ6
+                                            LTC ltc_p2sh             : MSbwSBhDaeRPjUq7WbWJY9TKiF4WpZbBd8
 
 
 License: MIT License  
@@ -91,25 +87,46 @@ author = ("""[gold1 on grey15]\
                                             AUTHOR : Mustafa AKBAL e-mail: mstf.akbal@gmail.com 
                                             Telegram: @chawresho   Instagram: mstf.akbal
                                              ================= DONATE ADDRESSES ========================
-                                            BTC p2pkh                : 1NWQ4fEprRs6a2WdYKSz45aN7d2pZQLWpj
-                                            BTC p2wpkh               : bc1qa05lfk02xpp5qrjj9z7nkvel0jxdr6de8flu69
-                                            BTC p2wpkh_in_p2sh       : 3EHkXJB6tqAnxtFHphvKge3x9jsXxkUfCi
-                                            BTC p2wsh_in_p2sh        : 381WvfLxoE5TxosjDxH76w4N7WCxuuj8td
-                                            BTC p2sh                 : 37EZzu8wpmrcK32bi1WtS71wCrjLSZ7NYc
-                                            BTC p2wsh                : bc1qdja52dqcqy7wf4fz2uqgu0az2xuyrp2qz628fyyelkspq2vzrtms7e4tta
-                                            ETH/BSC/AVAX/POLYGON     : 0x85b8F14fC0CfB76b82aE5eDaED9CA4CC13A4E0f3
-                                            TRX                      : TNAGRcQGKQUpweLqwpTP8iALMyTLTDQQH1
-                                            DOGE                     : DSeVbvBU9qmP72hEGuSYbqjxzkm7uPcrte
-                                            BCH bch_p2pkh            : CdyHdhatjUqdUAR4E4mudbCPjkFERnznrh
-                                            BCH bch_p2sh             : HC4gTha2g65GwCudZhB3QVYUEWkME6PdLA
-                                            DASH dash_p2pkh          : XxCEtutip95giy7DQCmCucG9wxcWZYYiu8
-                                            DASH dash_p2sh           : 7XxCq6R7dkxFJoZYydBPmV1b8QZiFsnKia
-                                            ZEC zec_p2pkh            : t1fP14zexpkehAfZXUkG7BtgHNHDuGny4sZ
-                                            ZEC zec_p2sh             : t3Q7B1EZ5o6eCug5VeSL1Zv7rTWvRD48Gx2
-                                            LTC ltc_p2pkh            : LgjMKsYew679pqCniTSHL6e8KqQ6ddh4fC
-                                            LTC ltc_p2sh             : MDSiJnYumti37YJVotWEFkGLXZKnPw3yCH[/]""")
+                                            BTC p2pkh                : 191QB72rS77vP8NC1EC11wWqKtkfbm5SM8
+                                            BTC p2wpkh               : bc1q2l29nc6puvuk0rn449wf6l8rm62wuxst7uvjeu
+                                            BTC p2wpkh_in_p2sh       : 3AkjfoQn494K5FBdqMrnQRr4UsWji7Az62
+                                            BTC p2wsh_in_p2sh        : 3Cf3J2jw4xx8DVuwHDiQuVrsRoroUgzd7M
+                                            BTC p2sh                 : 3LPo8JHFdXZxvyZDQiWxiWCvPYU4oUhyHz
+                                            BTC p2wsh                : bc1q47rduwq76v4fteqvxm8p9axq39nq25kurgwlyaefmyqz3nhyc8rscuhwwq
+                                            ETH/BSC/AVAX/POLYGON     : 0x279f020A74BfE5Ba6a539B0f523D491A4122d18D
+                                            TRX                      : TDahqcDTkM2qnfoCPfed1YhcB5Eocc2Cwe
+                                            DOGE                     : DD9ViMyVjX2Cv8YnjpBZZhgSD2Uy1NQVbk
+                                            DASH dash_p2pkh          : XihF1MgkPpLWY4xms7WDsUCdAELMiBXCFZ
+                                            ZEC zec_p2pkh            : t1Rt1BSSzQRuWymR5wf189kckaYwkSSQAb1
+                                            LTC ltc_p2pkh            : LTEMSKLgWmMydw4MBNBJHxabY77wp1zyZ6
+                                            LTC ltc_p2sh             : MSbwSBhDaeRPjUq7WbWJY9TKiF4WpZbBd8[/]""")
 
 appPath = os.path.dirname(os.path.abspath(__file__))
+
+UnCompressed Address: 1HTZrCDM9Qsp7aztvbeSo5cP7u9dbwn6Qr
+Bitcoin P2PKH: 191QB72rS77vP8NC1EC11wWqKtkfbm5SM8
+Bitcoin P2SH: 3LPo8JHFdXZxvyZDQiWxiWCvPYU4oUhyHz
+Bitcoin P2WPKH: bc1q2l29nc6puvuk0rn449wf6l8rm62wuxst7uvjeu
+Bitcoin P2WSH: bc1q47rduwq76v4fteqvxm8p9axq39nq25kurgwlyaefmyqz3nhyc8rscuhwwq
+Bitcoin P2WPKH in Segwit: 3AkjfoQn494K5FBdqMrnQRr4UsWji7Az62
+Bitcoin P2WSH in Segwit: 3Cf3J2jw4xx8DVuwHDiQuVrsRoroUgzd7M
+Litecoin P2PKH: LTEMSKLgWmMydw4MBNBJHxabY77wp1zyZ6
+Litecoin P2SH: MSbwSBhDaeRPjUq7WbWJY9TKiF4WpZbBd8
+Litecoin P2WSH: ltc1q47rduwq76v4fteqvxm8p9axq39nq25kurgwlyaefmyqz3nhyc8rsmce759
+Litecoin P2WPKH: ltc1q2l29nc6puvuk0rn449wf6l8rm62wuxst6qkkpv
+Ethereum: 0x279f020A74BfE5Ba6a539B0f523D491A4122d18D
+Tron: TDahqcDTkM2qnfoCPfed1YhcB5Eocc2Cwe
+Dogecoin: DD9ViMyVjX2Cv8YnjpBZZhgSD2Uy1NQVbk
+DASH: XihF1MgkPpLWY4xms7WDsUCdAELMiBXCFZ
+DigiByte: DD9ViMyVjX2Cv8YnjpBZZhgSD2Uy1NQVbk
+Ravencoin: RHHbFcv92vvVT8jPUQB87Tr36ADGK2nhYZ
+QTUM: QUcPHQKZcZzjpGTDRZWV9DJTq9hNtNRypo
+zCASH: t1Rt1BSSzQRuWymR5wf189kckaYwkSSQAb1 
+
+
+
+
+
 
 # Global variables
 _thread_local = local()
