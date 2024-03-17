@@ -137,7 +137,7 @@ handler.setFormatter(formatter)
 
 
 # Variables to store address types of Bitcoin and other cryptocurrencies.
-p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, extra_variable = None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None
+p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, ltc_p2wsh, ltc_p2wpkh, extra_variable = None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None
 
 def create_table(cursor):
     # Eğer yoksa, DataBase tablosunu oluştur
@@ -227,14 +227,16 @@ def generate_wallet():
             zec_p2sh = hd_zec.p2sh_address()
 
             # Litecoin addresses types
-            global ltc_p2pkh, ltc_p2sh
+            global ltc_p2pkh, ltc_p2sh, ltc_p2wsh, ltc_p2wpkh
             ltc_p2pkh = hd_ltc.p2pkh_address()
             ltc_p2sh = hd_ltc.p2sh_address()
+            ltc_p2wsh = hd_ltc.p2wsh_address()
+            ltc_p2wpkh = hd_ltc.p2wpkh_address()
 
             # Add all addresses to a list.
             global addresses
             addresses = [p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc,
-                         ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh]
+                         ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, ltc_p2wsh, ltc_p2wpkh]
 
             return private_key, addresses
         except Exception as e:
@@ -294,7 +296,7 @@ def save_to_found_addresses(private_key, addresses, currency, matched_address, f
             file.write(f"Matched Address in Database: {matched_address}\n\n")
             win += 1
     except IOError as e:
-        logging.info(f"Found Wallet: {private_key} {p2pkh_address} {p2sh_address} {p2pkh_btc} {p2sh_btc} {p2wpkh_btc} {p2wsh_btc} {ethaddr} {trxadd} {dgaddr} {bch_p2pkh} {bch_p2sh} {dash_p2pkh} {dash_p2sh} {zec_p2pkh} {zec_p2sh} {ltc_p2pkh} {ltc_p2sh}")
+        logging.info(f"Found Wallet: {private_key} {p2pkh_address} {p2sh_address} {p2pkh_btc} {p2sh_btc} {p2wpkh_btc} {p2wsh_btc} {ethaddr} {trxadd} {dgaddr} {bch_p2pkh} {bch_p2sh} {dash_p2pkh} {dash_p2sh} {zec_p2pkh} {zec_p2sh} {ltc_p2pkh} {ltc_p2sh} {ltc_p2wsh} {ltc_p2wpkh}")
         logging.error(f'Writing File Error: {e}\n{traceback.format_exc()}')
 
 def get_address_count(cursor):
@@ -319,7 +321,7 @@ def show_first_addresses(cursor, limit=10):
 
 def process_private_key(args):
     private_key, addresses, found_addresses_filename, sqlite_db_filename, conn, cursor = args
-    global total_found, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh
+    global total_found, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, ltc_p2wsh, ltc_p2wpkh
     try:
         conn, cursor = get_connection(sqlite_db_filename)
 
@@ -377,13 +379,20 @@ def get_currency_from_address(address, addresses):
             return "LTC ltc_p2pkhc"
         elif address == ltc_p2sh:
             return "LTC ltc_p2sh"
+        elif address == ltc_p2wsh:
+            return "LTC ltc_p2wsh"
+        elif address == ltc_p2wpkh:
+            return "LTC ltc_p2wpkh"
+
+
+
         else:
             return "Unknown"
     else:
         return "Address Is Not Found In The List"
 
 def main():
-    global private_key, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh
+    global private_key, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, ltc_p2wsh, ltc_p2wpkh
     global total_found
 
     try:
@@ -433,7 +442,7 @@ def main():
                         f"[gold1 on grey15]Total Rich Addresses In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
                         f"[gold1 on grey15]Total Checked : [orange_red1]{private_key_addresses_count} [/]"
                         f"[gold1 on grey15]Win: [white]{win}[/]\n"
-                        f"PRIVATE KEY              : [grey54]{private_key}[/]\n"
+                        f"[gold1 on grey15]PRIVATE KEY              : [grey54]{private_key}[/]\n"
                         f"[gold1 on grey15]BTC p2pkh                : [white]{p2pkh_btc}[/]\n"
                         f"[gold1 on grey15]BTC p2wpkh               : [white]{p2wpkh_btc}[/]\n"
                         f"[gold1 on grey15]BTC p2wpkh_in_p2sh       : [white]{p2wpkh_in_p2sh_btc}[/]\n"
@@ -451,6 +460,8 @@ def main():
                         f"[gold1 on grey15]ZEC zec_p2sh             : [white]{zec_p2sh}[/]\n"
                         f"[gold1 on grey15]LTC ltc_p2pkh            : [white]{ltc_p2pkh}[/]\n"
                         f"[gold1 on grey15]LTC ltc_p2sh             : [white]{ltc_p2sh}[/]\n"
+                        f"[gold1 on grey15]LTC ltc_p2wsh            : [white]{ltc_p2wsh}[/]\n"
+                        f"[gold1 on grey15]LTC ltc_p2wpkh           : [white]{ltc_p2wpkh}[/]\n"
                         f"[gold1 on grey15]Found Wallets Info       : [white]{total_found}[/]"
                     )
                     style = "bold on grey11"
