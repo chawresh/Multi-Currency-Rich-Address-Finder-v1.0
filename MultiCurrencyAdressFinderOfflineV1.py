@@ -59,7 +59,6 @@ THE USE OF THE SOFTWARE IMPLIES THAT YOU UNDERSTAND AND ACCEPT THIS DISCLAIMER O
 
 """
 
-
 import os
 import logging
 import traceback
@@ -71,12 +70,15 @@ from concurrent.futures import ProcessPoolExecutor
 import sqlite3
 from queue import Queue
 from logging.handlers import QueueHandler, QueueListener
-from threading import local
+from threading import local, Lock, Thread
 from rich import print
 from rich.panel import Panel
 from rich.console import Console
 from rich.traceback import install
+
+
 install()
+
 
 
 author = ("""[gold1 on grey15]\
@@ -107,21 +109,21 @@ author = ("""[gold1 on grey15]\
                                             LTC ltc_p2wsh            : ltc1q47rduwq76v4fteqvxm8p9axq39nq25kurgwlyaefmyqz3nhyc8rsmce759
                                             LTC ltc_p2wpkh           : ltc1q2l29nc6puvuk0rn449wf6l8rm62wuxst6qkkpv[/]""")
 
-appPath = os.path.dirname(os.path.abspath(__file__))
-
+app_path = os.path.dirname(os.path.abspath(__file__))
 
 # Global variables
 _thread_local = local()
 address_count = 0
-total_found = ("")
-console = Console()
 win = 0
+console = Console()
 style = "bold on grey11"
 
-log_file = os.path.join(appPath, "app_log.log")
-sqlite_db_filename = os.path.join(appPath, 'PubKeys.db')
-found_addresses_filename = os.path.join(appPath, 'found.txt')
-addresses_file_path = os.path.join(appPath, 'newaddresses.txt')
+log_file = os.path.join(app_path, "app_log.log")
+sqlite_db_filename = os.path.join(app_path, 'PubKeys.db')
+found_addresses_filename = os.path.join(app_path, 'found.txt')
+addresses_file_path = os.path.join(app_path, 'newaddresses.txt')
+
+
 
 # Set logging level
 logging.basicConfig(level=logging.INFO)
@@ -135,19 +137,15 @@ listener.start()
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 
-
 # Variables to store address types of Bitcoin and other cryptocurrencies.
-p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, ltc_p2wsh, ltc_p2wpkh, extra_variable = None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None
-
+p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, ltc_p2wsh, ltc_p2wpkh = [None] * 19
 def create_table(cursor):
-    # Eğer yoksa, DataBase tablosunu oluştur
     try:
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS DataBase (
                 PubKeys TEXT NOT NULL UNIQUE
             )
         """)
-        # Create an index for the unique constraint.
         cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_pubkeys ON DataBase (PubKeys)")
     except sqlite3.Error as e:
         logging.error(f'SQLite Error: {e}\n{traceback.format_exc()}')
@@ -155,9 +153,9 @@ def create_table(cursor):
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def get_connection(sqlite_db_filename):
+def get_connection(db_filename):
     try:
-        conn = sqlite3.connect(sqlite_db_filename)
+        conn = sqlite3.connect(db_filename)
         cursor = conn.cursor()
         return conn, cursor
     except sqlite3.Error as e:
@@ -168,7 +166,7 @@ def generate_wallet():
     with ProcessPoolExecutor(max_workers=4) as executor:
         try:
             # Creat a Random Private Key
-            private_key = "".join(random.choice("0123456789abcdef") for _ in range(64))
+            private_key = "".join(random.choice("1111111") for _ in range(64))
 
             # Create HD Wallets
             hd_btc = HDWallet(BTC)
@@ -246,57 +244,38 @@ def generate_wallet():
 def add_to_database(cursor, conn, addresses_file_path):
     try:
         total = 0
-
-        # Read new rich addresses from file
         with open(addresses_file_path, "r") as addresses_file:
             newaddresses = [line.strip()[-8:] for line in addresses_file if line.strip()]
-
-        # For each address, if it doesn't already exist in the database, add it to the database.
         for address in newaddresses:
             cursor.execute("SELECT COUNT(*) FROM DataBase WHERE PubKeys = ?", (address,))
             count = cursor.fetchone()[0]
             if count == 0:
                 cursor.execute("INSERT INTO DataBase (PubKeys) VALUES (?)", (address,))
                 total += 1
-                #print(f'{address}  Addresses Are Addeding In Database. ', end='\r')
-                print(f'[white]Total: [gold1 on grey15]{total}[gold1 on grey15] {address} [white]Address Is Addeding In Database. Total: [gold1 on grey15]{total} [white] Addresses Are Added In Database.[/]', end='\r')
+                print(f'[white]Total: [gold1 on grey15]{total}[gold1 on grey15] {address} [white]Address Is Adding To Database. Total: [gold1 on grey15]{total} [white] Addresses Are Added To Database.[/]', end='\r')
             else:
                 print(f'[white]Total: [gold1 on grey15]{total}[gold1 on grey15] {address} [white]Already In Database.[/]', end='\r')
-
         conn.commit()
         with open(addresses_file_path, 'w') as file:
             file.write("")
-            print(f'[white]Total: [gold1 on grey15]{total} [white]Addresses Are Added In Database and Addresses in [gold1 on grey15]newaddresses.txt [white]Are Erased.[/]')
+            print(f'[white]Total: [gold1 on grey15]{total} [white]Addresses Are Added To Database and Addresses in [gold1 on grey15]newaddresses.txt [white]Are Erased.[/]')
     except sqlite3.Error as hata:
         print(f"SQLite Error: {hata}")
     except FileNotFoundError as hata:
-        print(f"File Not Found Error : {hata}")
+        print(f"File Not Found Error: {hata}")
     except Exception as hata:
         print(f"An unexpected error occurred: {hata}")
-    finally:
-        pass
 
-
-def check_database(address_last_8, cursor):
-    try:
-        cursor.execute("SELECT * FROM DataBase WHERE PubKeys LIKE ?", (f'%{address_last_8}',))
-        return cursor.fetchone() is not None
-    except sqlite3.Error as e:
-        logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
-        return False
-
-def save_to_found_addresses(private_key, addresses, currency, matched_address, found_addresses_filename):
+def save_to_found_addresses(private_key, addresses, matched_address, found_addresses_filename):
     try:
         with open(found_addresses_filename, 'a') as file:
             file.write(f"Private Key: {private_key}\n")
-            file.write(f"Currency: {currency}\n")
             file.write("Addresses:\n")
             for address in addresses:
                 file.write(f"{address}\n")
             file.write(f"Matched Address in Database: {matched_address}\n\n")
-            win += 1
+
     except IOError as e:
-        logging.info(f"Found Wallet: {private_key} {p2pkh_address} {p2sh_address} {p2pkh_btc} {p2sh_btc} {p2wpkh_btc} {p2wsh_btc} {ethaddr} {trxadd} {dgaddr} {bch_p2pkh} {bch_p2sh} {dash_p2pkh} {dash_p2sh} {zec_p2pkh} {zec_p2sh} {ltc_p2pkh} {ltc_p2sh} {ltc_p2wsh} {ltc_p2wpkh}")
         logging.error(f'Writing File Error: {e}\n{traceback.format_exc()}')
 
 def get_address_count(cursor):
@@ -311,187 +290,118 @@ def show_first_addresses(cursor, limit=10):
     try:
         cursor.execute(f"SELECT * FROM DataBase LIMIT {limit}")
         addresses = cursor.fetchall()
-
         logging.info(f"First {limit} Address:")
         for address in addresses:
             logging.info(address[0])
-        time.sleep(5)
     except sqlite3.Error as e:
         logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
 
+def check_database(cursor, address):
+    cursor.execute("SELECT COUNT(*) FROM DataBase WHERE PubKeys = ?", (address,))
+    return cursor.fetchone()[0] > 0
+
 def process_private_key(args):
-    private_key, addresses, found_addresses_filename, sqlite_db_filename, conn, cursor = args
-    global total_found, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, ltc_p2wsh, ltc_p2wpkh
+    private_key, addresses, found_addresses_filename, db_filename = args
     try:
-        conn, cursor = get_connection(sqlite_db_filename)
-
+        conn, cursor = get_connection(db_filename)
         for address in addresses:
-            currency = get_currency_from_address(address, addresses)
-            matched_address = None
-
-            address_last_8 = address[-8:]  # Take the last 8 digits of the address.
-
-            if check_database(address_last_8, cursor):
-                logging.info(f"{address} Is Found In The Database. ")
+            if check_database(cursor, address[-8:]):
                 matched_address = address
-                save_to_found_addresses(private_key, addresses, currency, matched_address, found_addresses_filename)
-                logging.info(f"Saved.")
-                total_found.append({"Currency": currency, "Private_key": private_key, "\n""Matched_address": matched_address}, "\n")
+                save_to_found_addresses(private_key, addresses, matched_address, found_addresses_filename)
+                win += 1
 
     except sqlite3.Error as e:
-        logging.error(f' Database Error: {e} \n{traceback.format_exc()}')
+        logging.error(f'Database Error: {e}\n{traceback.format_exc()}')
     finally:
-        pass
+        win_lock.release()
+        if conn:
+            conn.close()
 
-def get_currency_from_address(address, addresses):
-    if address in addresses:
-        if address == p2pkh_btc:
-            return "BTC p2pkh_btc"
-        elif address == p2wpkh_btc:
-            return "BTC p2wpkh_btc"
-        elif address == p2wpkh_in_p2sh_btc:
-            return "BTC p2wpkh_in_p2sh_btc"
-        elif address == p2wsh_in_p2sh_btc:
-            return "BTC p2wsh_in_p2sh_btc"
-        elif address == p2sh_btc:
-            return "BTC p2sh_btc"
-        elif address == p2wsh_btc:
-            return "BTC p2wsh_btc"
-        elif address == ethaddr:
-            return "ETH/BSC/AVAX/POLYGON"
-        elif address == trxadd:
-            return "TRX"
-        elif address == dgaddr:
-            return "DOGE"
-        elif address == bch_p2pkh:
-            return "BCH bch_p2pkh"
-        elif address == bch_p2sh:
-            return "BCH bch_p2sh"
-        elif address == dash_p2pkh:
-            return "DASH dash_p2pkh"
-        elif address == dash_p2sh:
-            return "DASH dash_p2sh"
-        elif address == zec_p2pkh:
-            return "ZEC zec_p2pkh"
-        elif address == zec_p2sh:
-            return "ZEC zec_p2sh"
-        elif address == ltc_p2pkh:
-            return "LTC ltc_p2pkhc"
-        elif address == ltc_p2sh:
-            return "LTC ltc_p2sh"
-        elif address == ltc_p2wsh:
-            return "LTC ltc_p2wsh"
-        elif address == ltc_p2wpkh:
-            return "LTC ltc_p2wpkh"
-
-
-
-        else:
-            return "Unknown"
-    else:
-        return "Address Is Not Found In The List"
 
 def main():
-    global private_key, p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, ltc_p2wsh, ltc_p2wpkh
-    global total_found
-
+    global p2pkh_btc, p2wpkh_btc, p2wpkh_in_p2sh_btc, p2wsh_in_p2sh_btc, p2sh_btc, p2wsh_btc, ethaddr, trxadd, dgaddr, bch_p2pkh, bch_p2sh, dash_p2pkh, dash_p2sh, zec_p2pkh, zec_p2sh, ltc_p2pkh, ltc_p2sh, ltc_p2wsh, ltc_p2wpkh
     try:
         conn, cursor = get_connection(sqlite_db_filename)
         create_table(cursor)
         add_to_database(cursor, conn, addresses_file_path)
+        global address_count,win
         address_count = get_address_count(cursor)
 
-
         private_key_addresses_count = 0
-        gerisayim = 0
-        katsayi = 10000
+        iteration_count = 0
+        iteration_step = 10000
         wait_time = 0.0000001
 
+
+
         with ProcessPoolExecutor(max_workers=6) as executor:
-            try:
-                while True:
-                    private_key_addresses_count += 20
-                    private_key, addresses = generate_wallet()
+            while True:
+                private_key_addresses_count += 22
+                private_key, addresses = generate_wallet()
 
-                    if private_key is None:
-                        pass
+                if not private_key:
+                    continue
 
-                    gerisayim += 1
+                iteration_count += 1
 
-                    if gerisayim >= katsayi:
-                        katsayi += 10000
-                        try:
-                            with open(addresses_file_path, 'r') as dosya:
-                                veri = dosya.read()
-                                if not veri:
-                                    print(f"{addresses_file_path} New Rich Addresses Are Not Found.")
-                                    pass
-                                else:
-                                    print(f"{addresses_file_path} Some New Rich Addresses Found.")
-                                    add_to_database(cursor, conn, addresses_file_path)
-                                    get_address_count(cursor)
-                        except FileNotFoundError:
-                            print(f"{addresses_file_path} File Is Not Found")
+                if iteration_count >= iteration_step:
+                    iteration_step += 10000
+                    with open(addresses_file_path, 'r') as file:
+                        if not file.read():
+                            print(f"{addresses_file_path} New Rich Addresses Are Not Found.")
+                        else:
+                            print(f"{addresses_file_path} Some New Rich Addresses Found.")
+                            add_to_database(cursor, conn, addresses_file_path)
+                            address_count = get_address_count(cursor)
+
+                args = (private_key, addresses, found_addresses_filename, sqlite_db_filename)
+                executor.submit(process_private_key, args)
 
 
-                    args = (private_key, addresses, found_addresses_filename, sqlite_db_filename, conn, cursor)
+                info_panel = (
+                    f"[gold1 on grey15]Total Rich Addresses In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
+                    f"[gold1 on grey15]Total Checked : [orange_red1]{private_key_addresses_count} [/]"
+                    f"[gold1 on grey15]Win: [white]{win}[/]\n"
+                    f"[gold1 on grey15]PRIVATE KEY              : [grey54]{private_key}[/]\n"
+                    f"[gold1 on grey15]BTC p2pkh                : [white]{p2pkh_btc}[/]\n"
+                    f"[gold1 on grey15]BTC p2wpkh               : [white]{p2wpkh_btc}[/]\n"
+                    f"[gold1 on grey15]BTC p2wpkh_in_p2sh       : [white]{p2wpkh_in_p2sh_btc}[/]\n"
+                    f"[gold1 on grey15]BTC p2wsh_in_p2sh        : [white]{p2wsh_in_p2sh_btc}[/]\n"
+                    f"[gold1 on grey15]BTC p2sh                 : [white]{p2sh_btc}[/]\n"
+                    f"[gold1 on grey15]BTC p2wsh                : [white]{p2wsh_btc}[/]\n"
+                    f"[gold1 on grey15]ETH/BSC/AVAX/POLYGON     : [white]{ethaddr}[/]\n"
+                    f"[gold1 on grey15]TRX                      : [white]{trxadd}[/]\n"
+                    f"[gold1 on grey15]DOGE                     : [white]{dgaddr}[/]\n"
+                    f"[gold1 on grey15]BCH bch_p2pkh            : [white]{bch_p2pkh}[/]\n"
+                    f"[gold1 on grey15]BCH bch_p2sh             : [white]{bch_p2sh}[/]\n"
+                    f"[gold1 on grey15]DASH dash_p2pkh          : [white]{dash_p2pkh}[/]\n"
+                    f"[gold1 on grey15]DASH dash_p2sh           : [white]{dash_p2sh}[/]\n"
+                    f"[gold1 on grey15]ZEC zec_p2pkh            : [white]{zec_p2pkh}[/]\n"
+                    f"[gold1 on grey15]ZEC zec_p2sh             : [white]{zec_p2sh}[/]\n"
+                    f"[gold1 on grey15]LTC ltc_p2pkh            : [white]{ltc_p2pkh}[/]\n"
+                    f"[gold1 on grey15]LTC ltc_p2sh             : [white]{ltc_p2sh}[/]\n"
+                    f"[gold1 on grey15]LTC ltc_p2wsh            : [white]{ltc_p2wsh}[/]\n"
+                    f"[gold1 on grey15]LTC ltc_p2wpkh           : [white]{ltc_p2wpkh}[/]"
+                )
 
-                    future = executor.submit(process_private_key, args)
+                clear_terminal()
+                print(author)
+                console.print(
+                    Panel(str(info_panel), title="[white]Multi Currency Rich Address Finder OFFLINE[/]",
+                          subtitle="[green_yellow] Developed By Mustafa AKBAL contact: mstf.akbal@gmail.com [/]", style="gold1"), style=style, justify="full"
+                )
+                time.sleep(wait_time)
 
-                    infoPanel = (
-                        f"[gold1 on grey15]Total Rich Addresses In Database: [orange_red1]{address_count}[/][gold1 on grey15] "
-                        f"[gold1 on grey15]Total Checked : [orange_red1]{private_key_addresses_count} [/]"
-                        f"[gold1 on grey15]Win: [white]{win}[/]\n"
-                        f"[gold1 on grey15]PRIVATE KEY              : [grey54]{private_key}[/]\n"
-                        f"[gold1 on grey15]BTC p2pkh                : [white]{p2pkh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wpkh               : [white]{p2wpkh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wpkh_in_p2sh       : [white]{p2wpkh_in_p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wsh_in_p2sh        : [white]{p2wsh_in_p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2sh                 : [white]{p2sh_btc}[/]\n"
-                        f"[gold1 on grey15]BTC p2wsh                : [white]{p2wsh_btc}[/]\n"
-                        f"[gold1 on grey15]ETH/BSC/AVAX/POLYGON     : [white]{ethaddr}[/]\n"
-                        f"[gold1 on grey15]TRX                      : [white]{trxadd}[/]\n"
-                        f"[gold1 on grey15]DOGE                     : [white]{dgaddr}[/]\n"
-                        f"[gold1 on grey15]BCH bch_p2pkh            : [white]{bch_p2pkh}[/]\n"
-                        f"[gold1 on grey15]BCH bch_p2sh             : [white]{bch_p2sh}[/]\n"
-                        f"[gold1 on grey15]DASH dash_p2pkh          : [white]{dash_p2pkh}[/]\n"
-                        f"[gold1 on grey15]DASH dash_p2sh           : [white]{dash_p2sh}[/]\n"
-                        f"[gold1 on grey15]ZEC zec_p2pkh            : [white]{zec_p2pkh}[/]\n"
-                        f"[gold1 on grey15]ZEC zec_p2sh             : [white]{zec_p2sh}[/]\n"
-                        f"[gold1 on grey15]LTC ltc_p2pkh            : [white]{ltc_p2pkh}[/]\n"
-                        f"[gold1 on grey15]LTC ltc_p2sh             : [white]{ltc_p2sh}[/]\n"
-                        f"[gold1 on grey15]LTC ltc_p2wsh            : [white]{ltc_p2wsh}[/]\n"
-                        f"[gold1 on grey15]LTC ltc_p2wpkh           : [white]{ltc_p2wpkh}[/]\n"
-                        f"[gold1 on grey15]Found Wallets Info       : [white]{total_found}[/]"
-                    )
-                    style = "bold on grey11"
-                    clear_terminal()
-                    print(author)
+    except KeyboardInterrupt:
+        logging.info("Program is closing. Found wallets are saved...")
 
-
-                    console.print(
-                        Panel(str(infoPanel), title="[white]Multi Currency Rich Address Finder OFFLINE[/]",
-                              subtitle="[green_yellow] Developed By Mustafa AKBAL contact: mstf.akbal@gmail.com [/]", style="gold1"), style=style, justify="full"
-                    )
-                    time.sleep(wait_time)
-
-            except KeyboardInterrupt:
-                logging.info("Program is closing. Found wallets are saved...")
-
-                with open(found_addresses_filename, 'a') as file:
-                    for entry in total_found:
-                        file.write(f"Currency: {entry['Currency']}\n")
-                        file.write(f"Private Key: {entry['Private_key']}\n")
-                        file.write(f"Matched Address in Database: {entry['Matched_address']}\n")
-
-                logging.info(f"Found Wallets Are Saved.")
-                conn.close()
-                cursor.close()
-                exit(0)
-
+        if conn:
+            conn.close()
+        if cursor:
+            cursor.close()
+        exit(0)
     except sqlite3.Error as e:
         logging.error(f"SQLite error: {e}\n{traceback.format_exc()}")
-
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}\n{traceback.format_exc()}")
 
@@ -499,13 +409,11 @@ if __name__ == "__main__":
     try:
         clear_terminal()
         print(author)
-
-
-        start = ("Launching the application... Please wait! Preparing the database may take a few minutes.")
+        start_message = "Launching the application... Please wait! Preparing the database may take a few minutes."
         console.print(
-            Panel(str(start), title="[white]Multi Currency Rich Address Finder[/]",
+            Panel(str(start_message), title="[white]Multi Currency Rich Address Finder[/]",
                 subtitle="[green_yellow blink] Developed By Mustafa AKBAL contact: mstf.akbal@gmail.com [/]", style="gold1"), style=style, justify="full"
             )
         main()
     except Exception as e:
-        print(f'Ana hata: {e}')
+        print(f'Main Error: {e}')
