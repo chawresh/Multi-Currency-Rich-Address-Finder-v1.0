@@ -166,7 +166,7 @@ def generate_wallet():
     with ProcessPoolExecutor(max_workers=4) as executor:
         try:
             # Creat a Random Private Key
-            private_key = "".join(random.choice("1111111") for _ in range(64))
+            private_key = "".join(random.choice("0123456789abcdef") for _ in range(64))
 
             # Create HD Wallets
             hd_btc = HDWallet(BTC)
