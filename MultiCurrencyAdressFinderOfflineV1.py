@@ -91,8 +91,6 @@ author = ("""[gold1 on grey15]\
                                             AUTHOR : Mustafa AKBAL e-mail: mstf.akbal@gmail.com 
                                             Telegram: @chawresho   Instagram: mstf.akbal
                                              ================= DONATE ADDRESSES ========================
-                                            Compressed Address: 191QB72rS77vP8NC1EC11wWqKtkfbm5SM8
-                                            UnCompressed Address: 1HTZrCDM9Qsp7aztvbeSo5cP7u9dbwn6Qr
                                             BTC p2pkh                : 191QB72rS77vP8NC1EC11wWqKtkfbm5SM8
                                             BTC p2wpkh               : bc1q2l29nc6puvuk0rn449wf6l8rm62wuxst7uvjeu
                                             BTC p2wpkh_in_p2sh       : 3AkjfoQn494K5FBdqMrnQRr4UsWji7Az62
@@ -245,7 +243,7 @@ def add_to_database(cursor, conn, addresses_file_path):
     try:
         total = 0
         with open(addresses_file_path, "r") as addresses_file:
-            newaddresses = [line.strip()[-8:] for line in addresses_file if line.strip()]
+            newaddresses = [line.strip() for line in addresses_file if line.strip()]
         for address in newaddresses:
             cursor.execute("SELECT COUNT(*) FROM DataBase WHERE PubKeys = ?", (address,))
             count = cursor.fetchone()[0]
@@ -270,9 +268,9 @@ def save_to_found_addresses(private_key, addresses, matched_address, found_addre
     try:
         with open(found_addresses_filename, 'a') as file:
             file.write(f"Private Key: {private_key}\n")
-            file.write("Addresses:\n")
-            for address in addresses:
-                file.write(f"{address}\n")
+            #file.write("Addresses:\n")
+            #for address in addresses:
+                #file.write(f"{address}\n")
             file.write(f"Matched Address in Database: {matched_address}\n\n")
 
     except IOError as e:
@@ -305,7 +303,7 @@ def process_private_key(args):
     try:
         conn, cursor = get_connection(db_filename)
         for address in addresses:
-            if check_database(cursor, address[-8:]):
+            if check_database(cursor, address):
                 matched_address = address
                 save_to_found_addresses(private_key, addresses, matched_address, found_addresses_filename)
                 win += 1
