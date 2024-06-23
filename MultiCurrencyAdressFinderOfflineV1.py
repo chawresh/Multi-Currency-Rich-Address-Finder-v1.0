@@ -343,7 +343,7 @@ def main():
                 iteration_count += 1
 
                 if iteration_count >= iteration_step:
-                    iteration_step += 10000
+                    iteration_step += 25000
                     with open(addresses_file_path, 'r') as file:
                         if not file.read():
                             print(f"{addresses_file_path} New Rich Addresses Are Not Found.")
