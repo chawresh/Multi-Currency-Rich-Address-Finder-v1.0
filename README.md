@@ -8,6 +8,8 @@ NOT:
 
 ADD YOUR RICH ADDRESSES INTO THE newaddresses.txt FILE. IT WILL CREATE THE DATABASE BY ITSELF 
 
+RICH ADDRESSES DOWNLOAD LINK https://github.com/Pymmdrza/Rich-Address-Wallet
+
 
 Developed by Mustafa AKBAL 
 
