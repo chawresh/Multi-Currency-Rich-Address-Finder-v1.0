@@ -4,13 +4,8 @@
 THE FASTEST WALLET CHECKER
 
 
-DOWNLOAD DATABASE WITH OVER `234.263.050`  ADDRESSES WITH BALANCE ( ONLY WITH LAST 8 DIGITS TO SCAN FASTER)
-
-⚠️ IF THE DOWNLOAD LINK DOES NOT WORK, CONTACT ME
-
-DATABASE DOWNLOAD LINK: https://drive.google.com/file/d/1DPjz1ywSiIonntK_B_IKg3l4Nf7pipmE/view?usp=drive_link
-
-![Alt text](https://github.com/chawresh/Multi-Currency-Rich-Address-Finder-v1.0/blob/fd81b6ff20e870f93960c13290684c81a3df0eef/screenshot.png)
+NOT:
+ADD YOUR RICH ADDRESSES INTO THE newaddresses.txt FILE 
 
 
 Developed by Mustafa AKBAL 
