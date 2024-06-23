@@ -1,29 +1,9 @@
 """
 Multi Currency Rich Address Finder V1 For Multi Currency Rich Address Finder v1.0
 
-Developed by Mustafa AKBAL 
-                                             ██████╗██╗  ██╗ █████╗ ██╗    ██╗██████╗ ███████╗███████╗██╗  ██╗
-                                            ██╔════╝██║  ██║██╔══██╗██║    ██║██╔══██╗██╔════╝██╔════╝██║  ██║
-                                            ██║     ███████║███████║██║ █╗ ██║██████╔╝█████╗  ███████╗███████║
-                                            ██║     ██╔══██║██╔══██║██║███╗██║██╔══██╗██╔══╝  ╚════██║██╔══██║
-                                            ╚██████╗██║  ██║██║  ██║╚███╔███╔╝██║  ██║███████╗███████║██║  ██║
-                                             ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
-                                            AUTHOR : Mustafa AKBAL e-mail: mstf.akbal@gmail.com 
-                                            Telegram: @chawresho   Instagram: mstf.akbal
-                                             ================= DONATE ADDRESSES ========================
-                                            BTC p2pkh                : 191QB72rS77vP8NC1EC11wWqKtkfbm5SM8
-                                            BTC p2wpkh               : bc1q2l29nc6puvuk0rn449wf6l8rm62wuxst7uvjeu
-                                            BTC p2wpkh_in_p2sh       : 3AkjfoQn494K5FBdqMrnQRr4UsWji7Az62
-                                            BTC p2wsh_in_p2sh        : 3Cf3J2jw4xx8DVuwHDiQuVrsRoroUgzd7M
-                                            BTC p2sh                 : 3LPo8JHFdXZxvyZDQiWxiWCvPYU4oUhyHz
-                                            BTC p2wsh                : bc1q47rduwq76v4fteqvxm8p9axq39nq25kurgwlyaefmyqz3nhyc8rscuhwwq
-                                            ETH/BSC/AVAX/POLYGON     : 0x279f020A74BfE5Ba6a539B0f523D491A4122d18D
-                                            TRX                      : TDahqcDTkM2qnfoCPfed1YhcB5Eocc2Cwe
-                                            DOGE                     : DD9ViMyVjX2Cv8YnjpBZZhgSD2Uy1NQVbk
-                                            DASH dash_p2pkh          : XihF1MgkPpLWY4xms7WDsUCdAELMiBXCFZ
-                                            ZEC zec_p2pkh            : t1Rt1BSSzQRuWymR5wf189kckaYwkSSQAb1
-                                            LTC ltc_p2pkh            : LTEMSKLgWmMydw4MBNBJHxabY77wp1zyZ6
-                                            LTC ltc_p2sh             : MSbwSBhDaeRPjUq7WbWJY9TKiF4WpZbBd8
+Developed by Mustafa AKBAL
+Contact: mstf.akbal@gmail.com
+Ethereum Address for Donations: 0x06aABB3CF9c2F6d74901eD02556D34019b31f5B5
 
 License: MIT License  
 Note: This application is the result of hard work and dedication. Please do not distribute it without permission and respect the effort put into its development.
@@ -69,7 +49,7 @@ install()
 
 appPath = os.path.dirname(os.path.abspath(__file__))
 
-ethereum_node_url = 'https://eth.drpc.org'
+ethereum_node_url = 'https://rpc.mevblocker.io'
 bsc_node_url = 'https://bsc-dataseed.binance.org'
 avax_node_url = 'https://avalanche.drpc.org'
 polygon_node_url = 'https://polygon.drpc.org'
@@ -198,12 +178,12 @@ async def process_block(block_number, latest_block_number):
 async def process_address(address, block_number, latest_block_number):
     global new_addresses
     try:
-        if await check_addresses_in_database(address[-8:]):
+        if await check_addresses_in_database(address):
             return
 
         balances = await check_address_balance(address)
 
-        if balances['eth_balance'] > 0.00001 or balances['avax_balance'] > 0.00001 or balances['polygon_balance'] > 0.00001 or balances['bsc_balance'] > 0.00001:
+        if balances['eth_balance'] > 1 or balances['avax_balance'] > 1 or balances['polygon_balance'] > 10 or balances['bsc_balance'] > 1:
             new_addresses.append(address)
             await write_to_new_addresses_file(address)
             clear_terminal()
