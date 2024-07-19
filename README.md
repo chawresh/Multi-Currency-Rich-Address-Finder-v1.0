@@ -10,7 +10,7 @@ ADD YOUR RICH ADDRESSES INTO THE newaddresses.txt FILE. IT WILL CREATE THE DATAB
 
 RICH ADDRESSES DOWNLOAD LINK https://github.com/Pymmdrza/Rich-Address-Wallet
 
-![alt text]([http://url/to/img.png](https://github.com/chawresh/Multi-Currency-Rich-Address-Finder-v1.0/blob/8ec25e4602c8daffe7414b257a50f6b900d324e9/screenshot.png))
+![alt text](https://github.com/chawresh/Multi-Currency-Rich-Address-Finder-v1.0/blob/8ec25e4602c8daffe7414b257a50f6b900d324e9/screenshot.png)
 
 
 Legal Disclaimer and Warning:
